@@ -47,6 +47,7 @@ public class GameOfLifeBoard {
                             }
                         }
                     }
+
                     if(board[i][j]) {
                         newBoard[i][j] = liveNeighbors == 3 || liveNeighbors == 2;
                     }
