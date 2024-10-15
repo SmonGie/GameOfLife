@@ -2,6 +2,8 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameOfLifeBoardTest {
@@ -25,8 +27,10 @@ class GameOfLifeBoardTest {
         };
 
         board = setCustomBoard(board, initialState);
+        System.out.println(Arrays.deepToString(board.getBoard()));
 
         board.doStep();
+        System.out.println(Arrays.deepToString(board.getBoard()));
 
         boolean[][] expectedState = {
                 {false,false,false},
