@@ -26,7 +26,7 @@ class GameOfLifeBoardTest {
                 {true, true, false}
         };
 
-        board = setCustomBoard(board, initialState);
+        board.setCustomBoard(initialState);
         System.out.println(Arrays.deepToString(board.getBoard()));
 
         board.doStep();
@@ -39,14 +39,5 @@ class GameOfLifeBoardTest {
         };
         assertArrayEquals(expectedState, board.getBoard());
 
-    }
-    private GameOfLifeBoard setCustomBoard(GameOfLifeBoard board, boolean[][] customBoard) {
-        boolean[][] currentBoard = board.getBoard();
-        for (int i = 0; i < currentBoard.length; i++) {
-            for (int j = 0; j < currentBoard[0].length; j++) {
-                currentBoard[i][j] = customBoard[i][j];
-            }
-        }
-        return board;
     }
 }

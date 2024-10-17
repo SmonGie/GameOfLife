@@ -58,4 +58,10 @@ public class GameOfLifeBoard {
         }
         board = newBoard;
     }
+
+    public void setCustomBoard(boolean[][] customBoard) {
+        for (int i = 0; i < board.length; i++) {
+            System.arraycopy(customBoard[i], 0, board[i], 0, board[0].length);
+        }
+    }
 }
