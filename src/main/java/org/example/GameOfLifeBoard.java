@@ -3,7 +3,7 @@ package org.example;
 import java.util.Random;
 
 public class GameOfLifeBoard {
-    private boolean[][] board;
+    private final boolean[][] board;
 
     public GameOfLifeBoard(int width, int height) {
 
@@ -33,34 +33,34 @@ public class GameOfLifeBoard {
         return newBoard;
     }
 
-    public void doStep() {
-        boolean[][] newBoard = new boolean[board.length][board[0].length];
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
+    public void doStep(GameOfLifeBoard golb) {
+        boolean[][] newBoard = new boolean[golb.getBoard().length][golb.getBoard()[0].length];
+        for (int i = 0; i < golb.getBoard().length; i++) {
+            for (int j = 0; j < golb.getBoard()[i].length; j++) {
                 int liveNeighbors = 0;
                 for (int k = -1; k <= 1; k++) {
                     for (int l = -1; l <= 1; l++) {
                         if (k == 0 && l == 0) {
                             continue;
                         }
-                        int neighbourRow = (i + k + board.length) % board.length;
-                        int neighbourCol = (j + l + board[0].length) % board[0].length;
-                        if (board[neighbourRow][neighbourCol]) {
+                        int neighbourRow = (i + k + golb.getBoard().length) % golb.getBoard().length;
+                        int neighbourCol = (j + l + golb.getBoard()[0].length) % golb.getBoard()[0].length;
+                        if (golb.getBoard()[neighbourRow][neighbourCol]) {
                             liveNeighbors++;
                         }
                     }
                 }
-                newBoard[i][j] = (liveNeighbors == 3 || (board[i][j] && liveNeighbors == 2));
+                newBoard[i][j] = (liveNeighbors == 3 || (golb.getBoard()[i][j] && liveNeighbors == 2));
             }
         }
-        board = newBoard;
+        golb.setCustomBoard(newBoard);
     }
 
     public void simulate(int generations) {
         for (int i = 0; i < generations; i++) {
             System.out.println("Generacja " + (i + 1) + ":");
             showBoard();
-            doStep();
+            doStep(this);
         }
     }
 

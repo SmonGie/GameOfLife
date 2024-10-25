@@ -113,7 +113,6 @@
                         <version>7.5.0</version>
                     </dependency>
                 </dependencies>
-
             </plugin>
         </plugins>
     </build>
@@ -143,17 +142,16 @@
                     </reportSet>
                 </reportSets>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>3.3.0</version>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.25.0</version>
-
-                </plugin>
+            </plugin>
         </plugins>
     </reporting>
 

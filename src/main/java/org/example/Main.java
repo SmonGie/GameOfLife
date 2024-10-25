@@ -11,7 +11,7 @@ public class Main {
         int height = scanner.nextInt();
         System.out.print("Podaj liczbę pokoleń do symulacji: ");
         int generations = scanner.nextInt();
-        GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+        GameOfLifeBoard board = new GameOfLifeBoard(height, width);
         board.simulate(generations);
     }
 }
