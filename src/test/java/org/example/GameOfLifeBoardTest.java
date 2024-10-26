@@ -2,14 +2,15 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameOfLifeBoardTest {
+
+    private final PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
+
     @Test
     void testGameOfLifeBoardGeneration() {
         int n = 10000;
@@ -29,9 +30,7 @@ class GameOfLifeBoardTest {
         };
 
         board.setCustomBoard(initialState);
-        //System.out.println(Arrays.deepToString(board.getBoard()));
-        board.doStep(board);
-        //System.out.println(Arrays.deepToString(board.getBoard()));
+        board.doSimulationStep(simulator);
         boolean[][] expectedState = {
                 {false, false, false},
                 {false, false, false},
@@ -50,7 +49,7 @@ class GameOfLifeBoardTest {
                 {false, true, false, false}
         };
         board.setCustomBoard(initialState);
-        board.doStep(board);
+        board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {false, false, false, false},
                 {true, true, true, false},
@@ -70,7 +69,7 @@ class GameOfLifeBoardTest {
                 {false, false, false, false}
         };
         board.setCustomBoard(initialState);
-        board.doStep(board);
+        board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {true, true, true, true},
                 {false, false, false, false},
@@ -90,7 +89,7 @@ class GameOfLifeBoardTest {
                 {false, false, false, false}
         };
         board.setCustomBoard(initialState);
-        board.doStep(board);
+        board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {false, false, false, false},
                 {false, false, false, false},
@@ -110,7 +109,7 @@ class GameOfLifeBoardTest {
                 {false, false, false, false}
         };
         board.setCustomBoard(initialState);
-        board.doStep(board);
+        board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {false, false, false, false},
                 {false, false, false, false},
@@ -130,7 +129,7 @@ class GameOfLifeBoardTest {
                 {true, false, false, true}
         };
         board.setCustomBoard(initialState);
-        board.doStep(board);
+        board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {true, false, false, true},
                 {false, false, false, false},
@@ -155,46 +154,6 @@ class GameOfLifeBoardTest {
     }
 
     @Test
-    public void testSimulateSingleGeneration() {
-        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
-        boolean[][] initialState = {
-                {false, false, false, false},
-                {false, true, false, false},
-                {true, true, true, false},
-                {false, true, false, false}
-        };
-        board.setCustomBoard(initialState);
-        board.simulate(1);
-        boolean[][] expactedAfterSimulation = {
-                {false, false, false, false},
-                {true, true, true, false},
-                {true, false, true, false},
-                {true, true, true, false}
-        };
-        assertArrayEquals(expactedAfterSimulation, board.getBoard());
-    }
-
-    @Test
-    public void testSimulateTwoGenerations() {
-        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
-        boolean[][] initialState = {
-                {false, false, false, false},
-                {false, true, false, false},
-                {true, true, true, false},
-                {false, true, false, false}
-        };
-        board.setCustomBoard(initialState);
-        board.simulate(2);
-        boolean[][] expactedAfterSimulation = {
-                {false, false, false, false},
-                {true, false, true, false},
-                {false, false, false, false},
-                {true, false, true, false}
-        };
-        assertArrayEquals(expactedAfterSimulation, board.getBoard());
-    }
-
-    @Test
     public void testDisplay() {
         GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
         boolean[][] initialState = {
@@ -215,6 +174,43 @@ class GameOfLifeBoardTest {
                 + "O O O . " + System.lineSeparator()
                 + ". O . . " + System.lineSeparator();
         assertEquals(expectedOutput, output);
+    }
+
+    @Test
+    void testDoSimulationStep() {
+        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
+        boolean[][] initialState = {
+                {true, false, false, true},
+                {false, false, false, false},
+                {false, false, false, false},
+                {true, false, false, true}
+        };
+        board.setCustomBoard(initialState);
+
+        board.doSimulationStep(simulator);
+
+        boolean[][] expectedState = {
+                {true, false, false, true},
+                {false, false, false, false},
+                {false, false, false, false},
+                {true, false, false, true}
+        };
+        assertArrayEquals(expectedState, board.getBoard());
+    }
+
+    @Test
+    public void testSetCustomBoard() {
+        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
+        boolean[][] customState = {
+                {true, false, false, false},
+                {false, false, true, false},
+                {false, true, false, false},
+                {false, false, false, true}
+        };
+
+        board.setCustomBoard(customState);
+
+        assertArrayEquals(customState, board.getBoard());
     }
 
 }

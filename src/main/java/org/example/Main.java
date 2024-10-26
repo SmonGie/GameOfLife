@@ -11,7 +11,12 @@ public class Main {
         int height = scanner.nextInt();
         System.out.print("Podaj liczbę pokoleń do symulacji: ");
         int generations = scanner.nextInt();
-        GameOfLifeBoard board = new GameOfLifeBoard(height, width);
-        board.simulate(generations);
+        PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
+        GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+        for (int i = 0; i < generations; i++) {
+            System.out.println("Generation " + (i + 1));
+            board.showBoard();
+            board.doSimulationStep(simulator);
+        }
     }
 }
