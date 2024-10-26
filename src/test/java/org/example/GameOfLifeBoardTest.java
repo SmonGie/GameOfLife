@@ -141,7 +141,7 @@ class GameOfLifeBoardTest {
 
 
     @Test
-    public void testGetBoard() {
+    public void testSetGetBoard() {
         GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
         boolean[][] initialState = {
                 {true, false, false, true},
@@ -196,21 +196,6 @@ class GameOfLifeBoardTest {
                 {true, false, false, true}
         };
         assertArrayEquals(expectedState, board.getBoard());
-    }
-
-    @Test
-    public void testSetCustomBoard() {
-        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
-        boolean[][] customState = {
-                {true, false, false, false},
-                {false, false, true, false},
-                {false, true, false, false},
-                {false, false, false, true}
-        };
-
-        board.setCustomBoard(customState);
-
-        assertArrayEquals(customState, board.getBoard());
     }
 
 }
