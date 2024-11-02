@@ -7,11 +7,27 @@ import java.util.Random;
 public class GameOfLifeCell {
     private boolean value;
     private List<GameOfLifeCell> neighbors;
+    private List<CellObserver> observers;
 
     public GameOfLifeCell() {
         Random rand = new Random();
         value = rand.nextBoolean();
         neighbors = new ArrayList<>();
+        observers = new ArrayList<>();
+    }
+
+    public void addObserver(CellObserver observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(CellObserver observer) {
+        observers.remove(observer);
+    }
+
+    public void notifyObservers() {
+        for (CellObserver observer : observers) {
+            observer.update();
+        }
     }
 
     public void addNeighbor(GameOfLifeCell neighbor) {
@@ -42,5 +58,6 @@ public class GameOfLifeCell {
 
     public void updateState(boolean newState) {
         this.value = newState;
+        notifyObservers();
     }
 }

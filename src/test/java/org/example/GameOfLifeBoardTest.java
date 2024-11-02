@@ -241,8 +241,7 @@ class GameOfLifeBoardTest {
 
         GameOfLifeCell centerCell = board.getCell(1, 1);
 
-        int[][] expectedNeighbors = {{0, 0}, {0, 1}, {0, 2}, {1, 0},{1, 2}, {2, 0}, {2, 1}, {2, 2}
-        };
+        int[][] expectedNeighbors = {{0, 0}, {0, 1}, {0, 2}, {1, 0},{1, 2}, {2, 0}, {2, 1}, {2, 2}};
 
         assertEquals(expectedNeighbors.length, centerCell.getNeighbors().size());
 

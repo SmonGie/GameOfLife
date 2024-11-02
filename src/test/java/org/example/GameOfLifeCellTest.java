@@ -128,7 +128,7 @@ class GameOfLifeCellTest {
         GameOfLifeCell neighbor2 = new GameOfLifeCell();
         neighbor2.updateState(true);
         GameOfLifeCell neighbor3 = new GameOfLifeCell();
-        neighbor3.updateState(false); //
+        neighbor3.updateState(false);
         cell.addNeighbor(neighbor1);
         cell.addNeighbor(neighbor2);
         cell.addNeighbor(neighbor3);
