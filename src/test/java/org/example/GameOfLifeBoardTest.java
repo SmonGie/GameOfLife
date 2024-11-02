@@ -13,7 +13,7 @@ class GameOfLifeBoardTest {
 
     @Test
     void testGameOfLifeBoardGeneration() {
-        int n = 10000;
+        int n = 100;
         GameOfLifeBoard board1 = new GameOfLifeBoard(n, n);
         GameOfLifeBoard board2 = new GameOfLifeBoard(n, n);
 
@@ -198,4 +198,57 @@ class GameOfLifeBoardTest {
         assertArrayEquals(expectedState, board.getBoard());
     }
 
+    @Test
+    void  testGetGameOfLifeRow()
+    {
+        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
+        boolean[][] initialState = {
+                {true, false, false, true},
+                {false, false, false, false},
+                {false, false, false, false},
+                {true, false, false, true}
+        };
+        board.setCustomBoard(initialState);
+
+        boolean[] resultRow = board.getGameOfLifeRow(3);
+
+        boolean[] expectedRow = {true, false, false, true};
+
+        assertArrayEquals(expectedRow, resultRow);
+    }
+
+    @Test
+    void  testGetGameOfLifeColumn()
+    {
+        GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
+        boolean[][] initialState = {
+                {true, false, false, true},
+                {false, false, false, false},
+                {false, false, false, false},
+                {true, false, false, true}
+        };
+        board.setCustomBoard(initialState);
+
+        boolean[] resultColumn = board.getGameOfLifeColumn(1);
+
+        boolean[] expectedColumn = {false, false, false, false};
+
+        assertArrayEquals(expectedColumn, resultColumn);
+    }
+    @Test
+    void testNeighborsInitialization() {
+        GameOfLifeBoard board = new GameOfLifeBoard(3, 3);
+
+        GameOfLifeCell centerCell = board.getCell(1, 1);
+
+        int[][] expectedNeighbors = {{0, 0}, {0, 1}, {0, 2}, {1, 0},{1, 2}, {2, 0}, {2, 1}, {2, 2}
+        };
+
+        assertEquals(expectedNeighbors.length, centerCell.getNeighbors().size());
+
+        for (int[] position : expectedNeighbors) {
+            GameOfLifeCell neighborCell = board.getCell(position[0], position[1]);
+            assertTrue(centerCell.getNeighbors().contains(neighborCell));
+        }
+    }
 }

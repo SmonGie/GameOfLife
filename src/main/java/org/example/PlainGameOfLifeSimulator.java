@@ -1,6 +1,6 @@
 package org.example;
 
-public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
+public class PlainGameOfLifeSimulator implements GameOfLifeSimulator<GameOfLifeBoard> {
     @Override
     public void doStep(GameOfLifeBoard golb) {
         boolean[][] newBoard = new boolean[golb.getBoard().length][golb.getBoard()[0].length];

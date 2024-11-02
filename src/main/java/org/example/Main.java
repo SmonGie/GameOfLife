@@ -13,10 +13,19 @@ public class Main {
         int generations = scanner.nextInt();
         PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
         GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+
+        runSimulation(board, simulator, generations);
+
+    }
+
+    private static void runSimulation(GameOfLifeBoard board, PlainGameOfLifeSimulator simulator, int generations) {
         for (int i = 0; i < generations; i++) {
             System.out.println("Generation " + (i + 1));
             board.showBoard();
             board.doSimulationStep(simulator);
         }
     }
+
+
+
 }
