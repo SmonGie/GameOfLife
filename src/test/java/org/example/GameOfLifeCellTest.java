@@ -2,6 +2,11 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameOfLifeCellTest {
@@ -163,6 +168,17 @@ class GameOfLifeCellTest {
         neighbor2.updateState(false);
 
         assertFalse(cell.nextState());
+    }
+
+    @Test
+    void observerAddRemove() {
+        GameOfLifeCell cell = new GameOfLifeCell();
+        List<GameOfLifeCell> cellList = new ArrayList<>();
+        cellList.add(cell);
+        GameOfLifeColumn golColumn = new GameOfLifeColumn(cellList);
+        //assertEquals(cellList.getFirst().getObservers(), cell.getObservers());
+        cell.removeObserver(golColumn);
+        assertEquals(cellList.getFirst().getObservers(), cell.getObservers());
     }
 
 }

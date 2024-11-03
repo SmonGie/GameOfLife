@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,14 +31,28 @@ class GameOfLifeBoardTest {
                 {true, true, false}
         };
 
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 3][i % 3]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
+
         board.doSimulationStep(simulator);
         boolean[][] expectedState = {
                 {false, false, false},
                 {false, false, false},
                 {false, false, false}
         };
-        assertArrayEquals(expectedState, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedState.length * expectedState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedState[i / 3][i % 3]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -48,7 +64,13 @@ class GameOfLifeBoardTest {
                 {true, true, true, false},
                 {false, true, false, false}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {false, false, false, false},
@@ -56,7 +78,14 @@ class GameOfLifeBoardTest {
                 {true, false, true, false},
                 {true, true, true, false}
         };
-        assertArrayEquals(expectedAfterStep, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedAfterStep.length * expectedAfterStep[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedAfterStep[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -68,7 +97,13 @@ class GameOfLifeBoardTest {
                 {true, true, true, true},
                 {false, false, false, false}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {true, true, true, true},
@@ -76,7 +111,14 @@ class GameOfLifeBoardTest {
                 {true, true, true, true},
                 {false, false, false, false}
         };
-        assertArrayEquals(expectedAfterStep, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedAfterStep.length * expectedAfterStep[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedAfterStep[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -88,7 +130,13 @@ class GameOfLifeBoardTest {
                 {false, true, true, false},
                 {false, false, false, false}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {false, false, false, false},
@@ -96,7 +144,14 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {false, false, false, false}
         };
-        assertArrayEquals(expectedAfterStep, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedAfterStep.length * expectedAfterStep[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedAfterStep[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -108,15 +163,19 @@ class GameOfLifeBoardTest {
                 {false, true, false, false},
                 {false, false, false, false}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+            expC.setState(false);
+            listExpState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         board.doSimulationStep(simulator);
-        boolean[][] expectedAfterStep = {
-                {false, false, false, false},
-                {false, false, false, false},
-                {false, false, false, false},
-                {false, false, false, false}
-        };
-        assertArrayEquals(expectedAfterStep, board.getBoard());
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -128,7 +187,13 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         board.doSimulationStep(simulator);
         boolean[][] expectedAfterStep = {
                 {true, false, false, true},
@@ -136,7 +201,14 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        assertArrayEquals(expectedAfterStep, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedAfterStep.length * expectedAfterStep[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedAfterStep[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
 
@@ -149,8 +221,21 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
-        assertArrayEquals(initialState, board.getBoard());
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
@@ -162,7 +247,13 @@ class GameOfLifeBoardTest {
                 {true, true, true, false},
                 {false, true, false, false}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outputStream));
@@ -185,7 +276,13 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
 
         board.doSimulationStep(simulator);
 
@@ -195,12 +292,18 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        assertArrayEquals(expectedState, board.getBoard());
+        List<GameOfLifeCell> listExpState = new ArrayList<>();
+        for (int i = 0; i < expectedState.length * expectedState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(expectedState[i / 4][i % 4]);
+            listExpState.add(expC);
+        }
+        for (int i = 0; i < board.getBoard().size(); i++)
+            assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
 
     @Test
-    void  testGetGameOfLifeRow()
-    {
+    void testGetGameOfLifeRow() {
         GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
         boolean[][] initialState = {
                 {true, false, false, true},
@@ -208,18 +311,31 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
 
-        boolean[] resultRow = board.getGameOfLifeRow(3);
+        List<GameOfLifeCell> resultRow = board.getGameOfLifeRow(3);
 
-        boolean[] expectedRow = {true, false, false, true};
-
-        assertArrayEquals(expectedRow, resultRow);
+        List<GameOfLifeCell> expectedRow = new ArrayList<GameOfLifeCell>();
+        for (int i = 0; i < 4; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            if (i == 0 || i == 3)
+                expC.setState(true);
+            else
+                expC.setState(false);
+            expectedRow.add(expC);
+        }
+        for (int i = 0; i < resultRow.size(); i++)
+            assertEquals(expectedRow.get(i).getState(), resultRow.get(i).getState());
     }
 
     @Test
-    void  testGetGameOfLifeColumn()
-    {
+    void testGetGameOfLifeColumn() {
         GameOfLifeBoard board = new GameOfLifeBoard(4, 4);
         boolean[][] initialState = {
                 {true, false, false, true},
@@ -227,21 +343,34 @@ class GameOfLifeBoardTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
 
-        boolean[] resultColumn = board.getGameOfLifeColumn(1);
+        List<GameOfLifeCell> resultColumn = board.getGameOfLifeColumn(1);
 
-        boolean[] expectedColumn = {false, false, false, false};
+        List<GameOfLifeCell> expectedColumn = new ArrayList<GameOfLifeCell>();
 
-        assertArrayEquals(expectedColumn, resultColumn);
+        for (int i = 0; i < 4; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(false);
+            expectedColumn.add(expC);
+        }
+        for (int i = 0; i < resultColumn.size(); i++)
+            assertEquals(expectedColumn.get(i).getState(), resultColumn.get(i).getState());
     }
+
     @Test
     void testNeighborsInitialization() {
         GameOfLifeBoard board = new GameOfLifeBoard(3, 3);
 
         GameOfLifeCell centerCell = board.getCell(1, 1);
 
-        int[][] expectedNeighbors = {{0, 0}, {0, 1}, {0, 2}, {1, 0},{1, 2}, {2, 0}, {2, 1}, {2, 2}};
+        int[][] expectedNeighbors = {{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 2}, {2, 0}, {2, 1}, {2, 2}};
 
         assertEquals(expectedNeighbors.length, centerCell.getNeighbors().size());
 

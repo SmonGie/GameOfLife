@@ -49,15 +49,24 @@ public class GameOfLifeCell {
                 aliveNeighbors++;
             }
         }
-        if (value) {
-            return aliveNeighbors == 2 || aliveNeighbors == 3;
-        } else {
-            return aliveNeighbors == 3;
-        }
+        return (aliveNeighbors == 3 || (value && aliveNeighbors == 2));
+    }
+
+    public boolean getState() {
+        return value;
+    }
+
+    public void setState(boolean value) {
+        this.value = value;
+        notifyObservers();
     }
 
     public void updateState(boolean newState) {
         this.value = newState;
         notifyObservers();
+    }
+
+    public List<CellObserver> getObservers() {
+        return observers;
     }
 }

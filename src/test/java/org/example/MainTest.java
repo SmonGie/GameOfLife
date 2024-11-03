@@ -39,7 +39,8 @@ class MainTest {
         PrintStream originalOut = System.out;
         System.setOut(new PrintStream(outputStream));
 
-        Main.main(new String[] {});
+        Main mainx = new Main();
+        mainx.main(new String[]{});
         System.setOut(originalOut);
 
         String output = outputStream.toString();

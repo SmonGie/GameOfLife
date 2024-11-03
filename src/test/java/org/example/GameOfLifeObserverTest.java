@@ -2,6 +2,7 @@ package org.example;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,13 @@ class GameOfLifeObserverTest {
                 {false, false, false, false},
                 {true, false, false, true}
         };
-        board.setCustomBoard(initialState);
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        board.setCustomBoard(listInitState);
 
         List<GameOfLifeCell> rowCells = new ArrayList<>();
         List<GameOfLifeCell> colCells = new ArrayList<>();
@@ -44,7 +51,7 @@ class GameOfLifeObserverTest {
 
         GameOfLifeCell centerCell = board.getCell(1, 1);
         centerCell.updateState(true);
-        board.getCell(1,2).updateState(true);
+        board.getCell(1, 2).updateState(true);
         int newAliveCountRow = row.countAliveCells();
         int newAliveCountColumn = column.countAliveCells();
 

@@ -15,4 +15,5 @@ public class GameOfLifeColumn extends GameOfLifeCellSize implements CellObserver
         System.out.println("Kolumna zaktualizowana: Żywe komórki = " + countAliveCells() + ", Martwe komórki = "
                 + countDeadCells());
     }
+    
 }
