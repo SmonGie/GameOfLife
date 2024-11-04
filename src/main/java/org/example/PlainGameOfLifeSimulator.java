@@ -1,8 +1,5 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PlainGameOfLifeSimulator implements GameOfLifeSimulator<GameOfLifeBoard> {
     @Override
     public void doStep(GameOfLifeBoard golb) {

@@ -49,7 +49,7 @@ public class GameOfLifeCell {
                 aliveNeighbors++;
             }
         }
-        return (aliveNeighbors == 3 || (value && aliveNeighbors == 2));
+        return aliveNeighbors == 3 || value && aliveNeighbors == 2;
     }
 
     public boolean getState() {
