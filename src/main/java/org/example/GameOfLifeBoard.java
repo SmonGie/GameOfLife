@@ -21,6 +21,7 @@ package org.example;
  */
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +39,9 @@ public class GameOfLifeBoard {
         for (int i = 0; i < cells.length; i++) {
             cells[i] = new GameOfLifeCell();
         }
-        board = List.of(cells);
+        List<GameOfLifeCell> cellList = new ArrayList<>(Arrays.asList(cells));
+        Collections.shuffle(cellList);
+        board = Collections.unmodifiableList(cellList);
         initializeNeighbors();
     }
 
@@ -102,10 +105,11 @@ public class GameOfLifeBoard {
 
 
     public List<GameOfLifeCell> getGameOfLifeColumn(int columnIndex) {
-        List<GameOfLifeCell> column = Arrays.asList(new GameOfLifeCell[height]);
+        List<GameOfLifeCell> column = new ArrayList<>(Collections.nCopies(height, new GameOfLifeCell()));
         for (int i = 0; i < height; i++) {
             column.set(i, board.get(i * height + columnIndex));
         }
         return Collections.unmodifiableList(column);
+
     }
 }
