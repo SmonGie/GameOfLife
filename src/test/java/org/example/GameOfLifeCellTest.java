@@ -89,24 +89,6 @@ class GameOfLifeCellTest {
     }
 
     @Test
-    void nextStateWithOneLiveNeighbors() {
-        GameOfLifeCell cell = new GameOfLifeCell();
-        cell.updateState(true);
-        GameOfLifeCell neighbor1 = new GameOfLifeCell();
-        neighbor1.updateState(true);
-        GameOfLifeCell neighbor2 = new GameOfLifeCell();
-        neighbor2.updateState(true);
-        GameOfLifeCell neighbor3 = new GameOfLifeCell();
-        neighbor3.updateState(false);
-
-        cell.addNeighbor(neighbor1);
-        cell.addNeighbor(neighbor2);
-        cell.addNeighbor(neighbor3);
-
-        assertTrue(cell.nextState());
-    }
-
-    @Test
     void nextStateWithTwoLiveNeighbors() {
         GameOfLifeCell cell = new GameOfLifeCell();
         cell.updateState(true);
@@ -176,7 +158,6 @@ class GameOfLifeCellTest {
         List<GameOfLifeCell> cellList = new ArrayList<>();
         cellList.add(cell);
         GameOfLifeColumn golColumn = new GameOfLifeColumn(cellList);
-        //assertEquals(cellList.getFirst().getObservers(), cell.getObservers());
         cell.removeObserver(golColumn);
         assertEquals(cellList.getFirst().getObservers(), cell.getObservers());
     }

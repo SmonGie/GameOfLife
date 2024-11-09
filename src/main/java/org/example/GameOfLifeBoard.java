@@ -1,23 +1,23 @@
 package org.example;
 
-
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class GameOfLifeBoard {
-    private List<GameOfLifeCell> board = new ArrayList<GameOfLifeCell>();
+    private List<GameOfLifeCell> board;
     int width;
     int height;
 
     public GameOfLifeBoard(int width, int height) {
         this.width = width;
         this.height = height;
-        this.board = new ArrayList<>(width * height);
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                board.add(i * height + j, new GameOfLifeCell());
-            }
+
+        GameOfLifeCell[] cells = new GameOfLifeCell[width * height];
+        for (int i = 0; i < cells.length; i++) {
+            cells[i] = new GameOfLifeCell();
         }
+        board = List.of(cells);
         initializeNeighbors();
     }
 
@@ -56,13 +56,7 @@ public class GameOfLifeBoard {
     }
 
     public List<GameOfLifeCell> getBoard() {
-        List<GameOfLifeCell> newBoard = new ArrayList<GameOfLifeCell>();
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                newBoard.add(i * height + j, board.get(i * height + j));
-            }
-        }
-        return newBoard;
+        return Collections.unmodifiableList(board);
     }
 
     public void setCustomBoard(List<GameOfLifeCell> customBoard) {
@@ -78,11 +72,7 @@ public class GameOfLifeBoard {
     }
 
     public List<GameOfLifeCell> getGameOfLifeRow(int rowIndex) {
-        List<GameOfLifeCell> row = new ArrayList<>();
-        for (int j = 0; j < width; j++) {
-            row.add(j, board.get(rowIndex * width + j));
-        }
-        return row;
+        return Collections.unmodifiableList(board.subList(rowIndex * width, (rowIndex + 1) * width));
     }
 
     public GameOfLifeCell getCell(int row, int col) {
@@ -91,10 +81,10 @@ public class GameOfLifeBoard {
 
 
     public List<GameOfLifeCell> getGameOfLifeColumn(int columnIndex) {
-        List<GameOfLifeCell> column = new ArrayList<>();
+        List<GameOfLifeCell> column = Arrays.asList(new GameOfLifeCell[height]);
         for (int i = 0; i < height; i++) {
-            column.add(i, board.get(i * height + columnIndex));
+            column.set(i, board.get(i * height + columnIndex));
         }
-        return column;
+        return Collections.unmodifiableList(column);
     }
 }

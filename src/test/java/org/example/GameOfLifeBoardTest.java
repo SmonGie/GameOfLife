@@ -321,13 +321,10 @@ class GameOfLifeBoardTest {
 
         List<GameOfLifeCell> resultRow = board.getGameOfLifeRow(3);
 
-        List<GameOfLifeCell> expectedRow = new ArrayList<GameOfLifeCell>();
+        List<GameOfLifeCell> expectedRow = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             GameOfLifeCell expC = new GameOfLifeCell();
-            if (i == 0 || i == 3)
-                expC.setState(true);
-            else
-                expC.setState(false);
+            expC.setState(i == 0 || i == 3);
             expectedRow.add(expC);
         }
         for (int i = 0; i < resultRow.size(); i++)
@@ -353,7 +350,7 @@ class GameOfLifeBoardTest {
 
         List<GameOfLifeCell> resultColumn = board.getGameOfLifeColumn(1);
 
-        List<GameOfLifeCell> expectedColumn = new ArrayList<GameOfLifeCell>();
+        List<GameOfLifeCell> expectedColumn = new ArrayList<>();
 
         for (int i = 0; i < 4; i++) {
             GameOfLifeCell expC = new GameOfLifeCell();

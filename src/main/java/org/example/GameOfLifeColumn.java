@@ -2,8 +2,8 @@ package org.example;
 
 import java.util.List;
 
-public class GameOfLifeColumn extends GameOfLifeCellSize implements CellObserver {
-    public GameOfLifeColumn(List<GameOfLifeCell> cells) {
+public class GameOfLifeColumn<T extends GameOfLifeCell> extends GameOfLifeCellSize<T> implements CellObserver {
+    public GameOfLifeColumn(List<T> cells) {
         super(cells);
         for (GameOfLifeCell cell : cells) {
             cell.addObserver(this);

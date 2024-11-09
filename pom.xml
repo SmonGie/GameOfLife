@@ -9,6 +9,14 @@
     <version>1.0-SNAPSHOT</version>
     <url>http://localhost/</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
         <java.version>23</java.version> <!-- Set to your Java version -->
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -78,7 +86,7 @@
                                 <limit>
                                     <counter>INSTRUCTION</counter>
                                     <value>COVEREDRATIO</value>
-                                    <minimum>0.98</minimum>
+                                    <minimum>1</minimum>
                                 </limit>
                             </limits>
                         </rule>

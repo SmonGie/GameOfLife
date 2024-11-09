@@ -1,16 +1,17 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class GameOfLifeCell {
     private boolean value;
-    private List<GameOfLifeCell> neighbors;
-    private List<CellObserver> observers;
+    private final List<GameOfLifeCell> neighbors;
+    private final List<CellObserver> observers;
+    private static final Random rand = new Random();
 
     public GameOfLifeCell() {
-        Random rand = new Random();
         value = rand.nextBoolean();
         neighbors = new ArrayList<>();
         observers = new ArrayList<>();
@@ -35,7 +36,7 @@ public class GameOfLifeCell {
     }
 
     public List<GameOfLifeCell> getNeighbors() {
-        return neighbors;
+        return Collections.unmodifiableList(neighbors);
     }
 
     public boolean getCellValue() {
@@ -67,6 +68,6 @@ public class GameOfLifeCell {
     }
 
     public List<CellObserver> getObservers() {
-        return observers;
+        return Collections.unmodifiableList(observers);
     }
 }
