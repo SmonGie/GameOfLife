@@ -9,9 +9,9 @@ package org.example;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,6 +20,7 @@ package org.example;
  * #L%
  */
 
+import org.apache.commons.lang3.builder.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,4 +113,39 @@ public class GameOfLifeBoard {
         return Collections.unmodifiableList(column);
 
     }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("board", board)
+                .append("width", width)
+                .append("height", height)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        GameOfLifeBoard other = (GameOfLifeBoard) obj;
+        return new EqualsBuilder()
+                .append("board", other.board)
+                .append("width", other.width)
+                .append("height", other.height)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(board)
+                .append(width)
+                .append(height)
+                .toHashCode();
+    }
+
 }

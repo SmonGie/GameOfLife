@@ -9,9 +9,9 @@ package org.example;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,12 +21,17 @@ package org.example;
  */
 
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class GameOfLifeCell {
+public class GameOfLifeCell extends AbstractRoot {
     private boolean value;
     private final List<GameOfLifeCell> neighbors;
     private final List<CellObserver> observers;
@@ -91,4 +96,48 @@ public class GameOfLifeCell {
     public List<CellObserver> getObservers() {
         return Collections.unmodifiableList(observers);
     }
+
+    @Override
+    public String toString() {
+        ToStringBuilder result = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("value", value)
+                .append("observers", observers);
+        for (GameOfLifeCell neighbor : neighbors) {
+            result.append(neighbor.toStringNoNeighbours());
+        }
+        return result.toString();
+    }
+
+    public String toStringNoNeighbours() {
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("value", value)
+                .append("observers", observers)
+                .toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        GameOfLifeCell other = (GameOfLifeCell) obj;
+        return new EqualsBuilder()
+                .append("value", other.value)
+                .append("neighbors", other.neighbors)
+                .append("observers", other.observers)
+                .isEquals();
+    }
+
+    /*@Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(value)
+                .append(neighbors)
+                .append(observers)
+                .toHashCode();
+    }*/
+
 }
