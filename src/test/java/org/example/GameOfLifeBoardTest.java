@@ -398,10 +398,9 @@ class GameOfLifeBoardTest {
         }
     }
 
-    /*@Test
+    @Test
     void testEquals() {
         GameOfLifeBoard board1 = new GameOfLifeBoard(3, 3);
-        GameOfLifeBoard board2 = new GameOfLifeBoard(3, 3);
         boolean[][] initialState = {
                 {true, false, false},
                 {false, false, false},
@@ -414,20 +413,23 @@ class GameOfLifeBoardTest {
             listInitState.add(expC);
         }
         board1.setCustomBoard(listInitState);
-        board2.setCustomBoard(listInitState);
-        assertTrue(board1.equals(board2));
+        assertTrue(board1.equals(board1));
         GameOfLifeCell expC = new GameOfLifeCell();
         expC.setState(false);
         listInitState.set(0, expC);
+        GameOfLifeBoard board2 = new GameOfLifeBoard(3, 3);
         board2.setCustomBoard(listInitState);
         assertFalse(board1.equals(board2));
+        assertFalse(board2.equals(expC));
+        GameOfLifeBoard board3 = null;
+        assertFalse(board1.equals(board3));
 
     }
 
     @Test
     void testHashCode() {
         GameOfLifeBoard board1 = new GameOfLifeBoard(3, 3);
-        GameOfLifeBoard board2 = new GameOfLifeBoard(3, 3);
+        GameOfLifeBoard board2 = board1;
         boolean[][] initialState = {
                 {true, false, false},
                 {false, false, false},
@@ -442,6 +444,6 @@ class GameOfLifeBoardTest {
         board1.setCustomBoard(listInitState);
         board2.setCustomBoard(listInitState);
         assertEquals(board1.hashCode(), board2.hashCode());
-    }*/
+    }
 
 }

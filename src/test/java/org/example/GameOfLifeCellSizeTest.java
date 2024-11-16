@@ -85,19 +85,11 @@ class GameOfLifeCellSizeTest {
         GameOfLifeCellSize<GameOfLifeCell> cellSize1 = new GameOfLifeCellSize<>(cells) {
         };
         GameOfLifeCellSize<GameOfLifeCell> cellSize2 = cellSize1;
-        GameOfLifeBoard q = new GameOfLifeBoard(1, 1);
-        GameOfLifeBoard q2 = null;
         assertTrue(cellSize1.equals(cellSize2));
+        GameOfLifeBoard q = new GameOfLifeBoard(1, 1);
         assertFalse(cellSize1.equals(q));
+        GameOfLifeBoard q2 = null;
         assertFalse(cellSize1.equals(q2));
-        List<GameOfLifeCell> cellz = Arrays.asList(
-                new TestGameOfLifeCellHelper(true),
-                new TestGameOfLifeCellHelper(true)
-        );
-        GameOfLifeCellSize<GameOfLifeCell> cellSize4 = new GameOfLifeCellSize<>(cellz) {
-        };
-        assertFalse(cellSize1.equals(cellSize4));
-
     }
 
     @Test

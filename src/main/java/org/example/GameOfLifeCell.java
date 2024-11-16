@@ -102,7 +102,8 @@ public class GameOfLifeCell extends AbstractRoot {
         ToStringBuilder result = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("value", value);
         for (Object neighbour : neighbors) {
-            result.append(neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
+            result.append(neighbour.getClass().getName() + "@"
+                    + Integer.toHexString(System.identityHashCode(neighbour)));
         }
         result.append("observers", observers);
         return result.toString();
@@ -129,7 +130,8 @@ public class GameOfLifeCell extends AbstractRoot {
         HashCodeBuilder result = new HashCodeBuilder(17, 37)
                 .append(value);
         for (Object neighbour : neighbors) {
-            result.append(neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
+            result.append(neighbour.getClass().getName() + "@"
+                    + Integer.toHexString(System.identityHashCode(neighbour)));
         }
         result.append(observers);
         return result.toHashCode();

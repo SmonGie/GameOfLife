@@ -123,7 +123,7 @@ public class GameOfLifeBoard {
                 .toString();
     }
 
-    /*@Override
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -137,7 +137,7 @@ public class GameOfLifeBoard {
                 .append(this.width, other.width)
                 .append(this.height, other.height)
                 .isEquals();
-    }*/
+    }
 
     @Override
     public int hashCode() {

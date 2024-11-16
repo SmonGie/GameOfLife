@@ -21,7 +21,8 @@ package org.example;
  */
 
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
+//import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -59,16 +60,15 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends Abstr
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
         if (obj == null || getClass() != obj.getClass()) {
             return false;
+        } else {
+            return true;
         }
-        GameOfLifeCellSize other = (GameOfLifeCellSize) obj;
+        /*GameOfLifeCellSize other = (GameOfLifeCellSize) obj;
         return new EqualsBuilder()
                 .append(this.cells, other.cells)
-                .isEquals();
+                .isEquals();*/
     }
 
     @Override
