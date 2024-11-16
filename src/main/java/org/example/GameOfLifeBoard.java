@@ -116,7 +116,7 @@ public class GameOfLifeBoard {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.DEFAULT_STYLE)
                 .append("board", board)
                 .append("width", width)
                 .append("height", height)

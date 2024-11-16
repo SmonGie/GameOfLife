@@ -100,19 +100,12 @@ public class GameOfLifeCell extends AbstractRoot {
     @Override
     public String toString() {
         ToStringBuilder result = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("value", value)
-                .append("observers", observers);
-        for (GameOfLifeCell neighbor : neighbors) {
-            result.append(neighbor.toStringNoNeighbours());
+                .append("value", value);
+        for (Object neighbour : neighbors) {
+            result.append(neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
         }
+        result.append("observers", observers);
         return result.toString();
-    }
-
-    public String toStringNoNeighbours() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("value", value)
-                .append("observers", observers)
-                .toString();
     }
 
     @Override
@@ -124,20 +117,24 @@ public class GameOfLifeCell extends AbstractRoot {
             return false;
         }
         GameOfLifeCell other = (GameOfLifeCell) obj;
-        return new EqualsBuilder()
-                .append("value", other.value)
-                .append("neighbors", other.neighbors)
-                .append("observers", other.observers)
-                .isEquals();
+        EqualsBuilder result = new EqualsBuilder()
+                .append("value", other.value);
+        for (Object neighbour : neighbors) {
+            result.append("neighbour", neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
+        }
+        result.append("observers", observers);
+        return result.isEquals();
     }
 
-    /*@Override
+    @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(value)
-                .append(neighbors)
-                .append(observers)
-                .toHashCode();
-    }*/
+        HashCodeBuilder result = new HashCodeBuilder(17, 37)
+                .append(value);
+        for (Object neighbour : neighbors) {
+            result.append(neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
+        }
+        result.append(observers);
+        return result.toHashCode();
+    }
 
 }

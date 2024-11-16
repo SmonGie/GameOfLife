@@ -34,8 +34,9 @@ public class Main {
         int generations = scanner.nextInt();
         PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
         GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+        System.out.println(board.toString());
+        System.out.println(board.hashCode());
         runSimulation(board, simulator, generations);
-
     }
 
     private static void runSimulation(GameOfLifeBoard board, PlainGameOfLifeSimulator simulator, int generations) {
