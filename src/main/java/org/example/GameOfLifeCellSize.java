@@ -67,7 +67,7 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends Abstr
         }
         GameOfLifeCellSize other = (GameOfLifeCellSize) obj;
         return new EqualsBuilder()
-                .append("cells", other.cells)
+                .append(this.cells, other.cells)
                 .isEquals();
     }
 

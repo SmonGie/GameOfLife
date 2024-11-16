@@ -118,11 +118,9 @@ public class GameOfLifeCell extends AbstractRoot {
         }
         GameOfLifeCell other = (GameOfLifeCell) obj;
         EqualsBuilder result = new EqualsBuilder()
-                .append("value", other.value);
-        for (Object neighbour : neighbors) {
-            result.append("neighbour", neighbour.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(neighbour)));
-        }
-        result.append("observers", observers);
+                .append(this.value, other.value)
+                .append(this.neighbors, other.neighbors)
+                .append(this.observers, observers);
         return result.isEquals();
     }
 

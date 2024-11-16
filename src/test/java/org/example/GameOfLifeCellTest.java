@@ -9,9 +9,9 @@ package org.example;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -179,6 +179,46 @@ class GameOfLifeCellTest {
         GameOfLifeColumn golColumn = new GameOfLifeColumn(cellList);
         cell.removeObserver(golColumn);
         assertEquals(cellList.getFirst().getObservers(), cell.getObservers());
+    }
+
+    @Test
+    void testEquals() {
+        GameOfLifeCell cell1 = new GameOfLifeCell();
+        GameOfLifeCell cell2 = new GameOfLifeCell();
+        cell1.updateState(false);
+        cell2.updateState(false);
+        GameOfLifeCell neighbor1 = new GameOfLifeCell();
+        neighbor1.updateState(true);
+        GameOfLifeCell neighbor2 = new GameOfLifeCell();
+        neighbor2.updateState(true);
+        cell1.addNeighbor(neighbor1);
+        cell1.addNeighbor(neighbor2);
+        cell2.addNeighbor(neighbor1);
+        cell2.addNeighbor(neighbor2);
+        assertTrue(cell1.equals(cell2));
+        cell2.updateState(true);
+        assertFalse(cell1.equals(cell2));
+        GameOfLifeBoard q = new GameOfLifeBoard(1, 1);
+        assertFalse(cell1.equals(q));
+        GameOfLifeCell q2 = null;
+        assertFalse(cell1.equals(q2));
+    }
+
+    @Test
+    void testHashCode() {
+        GameOfLifeCell cell1 = new GameOfLifeCell();
+        GameOfLifeCell cell2 = new GameOfLifeCell();
+        cell1.updateState(false);
+        cell2.updateState(false);
+        GameOfLifeCell neighbor1 = new GameOfLifeCell();
+        neighbor1.updateState(true);
+        GameOfLifeCell neighbor2 = new GameOfLifeCell();
+        neighbor2.updateState(true);
+        cell1.addNeighbor(neighbor1);
+        cell1.addNeighbor(neighbor2);
+        cell2.addNeighbor(neighbor1);
+        cell2.addNeighbor(neighbor2);
+        assertEquals(cell1.hashCode(), cell2.hashCode());
     }
 
 }
