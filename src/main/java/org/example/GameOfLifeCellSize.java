@@ -30,7 +30,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends AbstractRoot {
+public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> {
     protected List<T> cells;
 
     public GameOfLifeCellSize(List<T> cells) {
@@ -51,14 +51,12 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends Abstr
         return cells.size() - countAliveCells();
     }
 
-    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.DEFAULT_STYLE)
                 .append("cells", cells)
                 .toString();
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -70,7 +68,6 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends Abstr
         return Objects.equals(this.cells, other.cells);
     }
 
-    @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(cells)

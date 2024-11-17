@@ -7,24 +7,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class fakeClass extends AbstractRoot {
-    private String name;
-    private int number;
-
-    public fakeClass(String name, int number) {
-        this.name = name;
-        this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-}
-
 public class AbstractRootTest {
 
     @Test
@@ -123,62 +105,5 @@ public class AbstractRootTest {
 
         String expectedResult = "GameOfLifeCell {value: true, neighbors: [2], observers: []}";
         assertEquals(expectedResult, cell.toString());
-    }
-
-    @Test
-    public void testToString() {
-        fakeClass obj = new fakeClass("Test", 42);
-
-        String expected = "fakeClass {name: Test, number: 42}";
-        assertEquals(expected, obj.toString());
-    }
-
-    @Test
-    public void testEqualsSameState() {
-        fakeClass obj1 = new fakeClass("Test", 42);
-        fakeClass obj2 = new fakeClass("Test", 42);
-
-        assertTrue(obj1.equals(obj2));
-    }
-
-    @Test
-    public void testEqualsDifferentState() {
-
-        fakeClass obj1 = new fakeClass("Test", 42);
-        fakeClass obj2 = new fakeClass("Test", 43);
-
-        assertFalse(obj1.equals(obj2));
-    }
-
-    @Test
-    public void testEqualsNull() {
-        fakeClass obj1 = new fakeClass("Test", 42);
-
-        assertFalse(obj1.equals(null));
-    }
-
-    @Test
-    public void testEqualsClass() {
-        fakeClass obj1 = new fakeClass("Test", 42);
-        String obj2 = "Test";
-
-        assertFalse(obj1.equals(obj2));
-    }
-
-    @Test
-    public void testHashCodeSameState() {
-
-        fakeClass obj1 = new fakeClass("Test", 42);
-        fakeClass obj2 = new fakeClass("Test", 42);
-
-        assertEquals(obj1.hashCode(), obj2.hashCode());
-    }
-
-    @Test
-    public void testHashCodeDifferentState() {
-        fakeClass obj1 = new fakeClass("Test", 42);
-        fakeClass obj2 = new fakeClass("Test", 43);
-
-        assertNotEquals(obj1.hashCode(), obj2.hashCode());
     }
 }

@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-public class PlainGameOfLifeSimulator extends AbstractRoot implements GameOfLifeSimulator<GameOfLifeBoard> {
+public class PlainGameOfLifeSimulator implements GameOfLifeSimulator<GameOfLifeBoard> {
     @Override
     public void doStep(GameOfLifeBoard golb) {
         boolean[][] tempGolCells = new boolean[golb.getWidth()][golb.getHeight()];
@@ -41,12 +41,10 @@ public class PlainGameOfLifeSimulator extends AbstractRoot implements GameOfLife
         }
     }
 
-    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.DEFAULT_STYLE).toString();
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -57,7 +55,6 @@ public class PlainGameOfLifeSimulator extends AbstractRoot implements GameOfLife
         return true;
     }
 
-    @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37).toHashCode();
     }

@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.*;
 
-public class GameOfLifeCell extends AbstractRoot {
+public class GameOfLifeCell {
     private boolean value;
     private final List<GameOfLifeCell> neighbors;
     private final List<CellObserver> observers;
@@ -91,7 +91,6 @@ public class GameOfLifeCell extends AbstractRoot {
         return Collections.unmodifiableList(observers);
     }
 
-    @Override
     public String toString() {
         Set<GameOfLifeCell> visited = new HashSet<>();
         return toStringHelper(visited);
@@ -129,10 +128,6 @@ public class GameOfLifeCell extends AbstractRoot {
         return result.toString();
     }
 
-
-
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -161,7 +156,6 @@ public class GameOfLifeCell extends AbstractRoot {
         return true;
     }
 
-    @Override
     public int hashCode() {
         HashCodeBuilder result = new HashCodeBuilder(17, 37)
                 .append(value);
