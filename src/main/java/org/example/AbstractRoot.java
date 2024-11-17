@@ -1,14 +1,17 @@
 package org.example;
 
+import java.lang.reflect.Field;
+
 public abstract class AbstractRoot {
 
-    /*@Override
+    @Override
     public String toString() {
-        Field fields[] = this.getClass().getDeclaredFields();
+        Field[] fields = this.getClass().getDeclaredFields();
         StringBuilder result = new StringBuilder(this.getClass().getSimpleName() + " {");
         try {
             for (Field field : fields) {
-                if (java.lang.reflect.Modifier.isStatic(field.getModifiers()) ||
+                if (java.lang.reflect.Modifier.isStatic(field.getModifiers())
+                        ||
                 java.lang.reflect.Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
@@ -39,7 +42,8 @@ public abstract class AbstractRoot {
         Field[] fields = this.getClass().getDeclaredFields();
         try {
             for (Field field : fields) {
-                if (java.lang.reflect.Modifier.isStatic(field.getModifiers()) ||
+                if (java.lang.reflect.Modifier.isStatic(field.getModifiers())
+                        ||
                 java.lang.reflect.Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
@@ -58,14 +62,12 @@ public abstract class AbstractRoot {
 
     @Override
     public int hashCode() {
-        if (this == null) {
-            return 0;
-        }
         Field[] fields = this.getClass().getDeclaredFields();
         int result = 17;
         try {
             for (Field field : fields) {
-                if (java.lang.reflect.Modifier.isStatic(field.getModifiers()) ||
+                if (java.lang.reflect.Modifier.isStatic(field.getModifiers())
+                        ||
                 java.lang.reflect.Modifier.isFinal(field.getModifiers())) {
                     continue;
                 }
@@ -76,6 +78,6 @@ public abstract class AbstractRoot {
             return 0;
         }
         return result;
-    }*/
+    }
 
 }

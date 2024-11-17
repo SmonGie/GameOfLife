@@ -22,10 +22,7 @@ package org.example;
 
 import org.apache.commons.lang3.builder.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class GameOfLifeBoard {
     private List<GameOfLifeCell> board;
@@ -116,11 +113,21 @@ public class GameOfLifeBoard {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.DEFAULT_STYLE)
-                .append("board", board)
-                .append("width", width)
-                .append("height", height)
-                .toString();
+        StringBuilder result = new StringBuilder(this.getClass().getSimpleName() + " {");
+        result.append("board: [");
+
+        StringJoiner sj = new StringJoiner(", ");
+        for (GameOfLifeCell cell : board) {
+            sj.add("GameOfLifeCell {value: " + cell.getCellValue() + "}");
+        }
+        result.append(sj.toString());
+        result.append("], ");
+
+        result.append("width: ").append(width);
+        result.append(", height: ").append(height);
+        result.append("}");
+
+        return result.toString();
     }
 
     @Override

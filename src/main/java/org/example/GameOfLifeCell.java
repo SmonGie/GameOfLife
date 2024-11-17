@@ -21,15 +21,9 @@ package org.example;
  */
 
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GameOfLifeCell extends AbstractRoot {
     private boolean value;
@@ -99,15 +93,44 @@ public class GameOfLifeCell extends AbstractRoot {
 
     @Override
     public String toString() {
-        ToStringBuilder result = new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("value", value);
-        for (Object neighbour : neighbors) {
-            result.append(neighbour.getClass().getName() + "@"
-                    + Integer.toHexString(System.identityHashCode(neighbour)));
+        Set<GameOfLifeCell> visited = new HashSet<>();
+        return toStringHelper(visited);
+    }
+
+    private String toStringHelper(Set<GameOfLifeCell> visited) {
+        if (!visited.add(this)) {
+            return this.getClass().getSimpleName() + " {value: " + value + ", neighbors: [...], observers: [...] }";
         }
-        result.append("observers", observers);
+
+        StringBuilder result = new StringBuilder(this.getClass().getSimpleName() + " {");
+        result.append("value: ").append(value);
+
+        if (neighbors != null && !neighbors.isEmpty()) {
+            result.append(", neighbors: [");
+            result.append(neighbors.size());
+            result.append("]");
+        } else {
+            result.append(", neighbors: []");
+        }
+
+        if (observers != null && !observers.isEmpty()) {
+            result.append(", observers: [");
+            StringJoiner sj = new StringJoiner(", ");
+            for (Object observer : observers) {
+                sj.add(observer.toString());
+            }
+            result.append(sj.toString());
+            result.append("]");
+        } else {
+            result.append(", observers: []");
+        }
+
+        result.append("}");
         return result.toString();
     }
+
+
+
 
     @Override
     public boolean equals(Object obj) {
@@ -118,22 +141,35 @@ public class GameOfLifeCell extends AbstractRoot {
             return false;
         }
         GameOfLifeCell other = (GameOfLifeCell) obj;
-        EqualsBuilder result = new EqualsBuilder()
-                .append(this.value, other.value)
-                .append(this.neighbors, other.neighbors)
-                .append(this.observers, observers);
-        return result.isEquals();
+
+        if (this.value != other.value) {
+            return false;
+        }
+
+        if (this.neighbors.size() != other.neighbors.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.neighbors.size(); i++) {
+
+            GameOfLifeCell neighbor1 = this.neighbors.get(i);
+            GameOfLifeCell neighbor2 = other.neighbors.get(i);
+
+            if (neighbor1.getCellValue() != neighbor2.getCellValue()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
         HashCodeBuilder result = new HashCodeBuilder(17, 37)
                 .append(value);
-        for (Object neighbour : neighbors) {
-            result.append(neighbour.getClass().getName() + "@"
-                    + Integer.toHexString(System.identityHashCode(neighbour)));
+
+        for (GameOfLifeCell neighbor : neighbors) {
+            result.append(neighbor.getCellValue());
         }
-        result.append(observers);
+
         return result.toHashCode();
     }
 

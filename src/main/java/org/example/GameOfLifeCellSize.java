@@ -60,15 +60,14 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> extends Abstr
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        } else {
+        if (this == obj) {
             return true;
         }
-        /*GameOfLifeCellSize other = (GameOfLifeCellSize) obj;
-        return new EqualsBuilder()
-                .append(this.cells, other.cells)
-                .isEquals();*/
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        GameOfLifeCellSize<?> other = (GameOfLifeCellSize<?>) obj;
+        return Objects.equals(this.cells, other.cells);
     }
 
     @Override

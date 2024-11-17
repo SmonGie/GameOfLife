@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractRootTest {
 
-    /*@Test
+    @Test
     void testGameOfLifeToString() {
         GameOfLifeBoard board = new GameOfLifeBoard(2, 2);
         boolean[][] initialState = {
@@ -104,7 +104,7 @@ public class AbstractRootTest {
         cell.addNeighbor(neighbor1);
         cell.addNeighbor(neighbor2);
 
-        String expectedResult = "GameOfLifeCell {value: true, neighbors: [GameOfLifeCell {value: true, neighbors: [], observers: []}, GameOfLifeCell {value: false, neighbors: [], observers: []}], observers: []}";
+        String expectedResult = "GameOfLifeCell {value: true, neighbors: [2], observers: []}";
         assertEquals(expectedResult, cell.toString());
-    }*/
+    }
 }

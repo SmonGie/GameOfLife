@@ -394,7 +394,7 @@ class GameOfLifeBoardTest {
 
         for (int[] position : expectedNeighbors) {
             GameOfLifeCell neighborCell = board.getCell(position[0], position[1]);
-            //assertTrue(centerCell.getNeighbors().contains(neighborCell));
+            assertTrue(centerCell.getNeighbors().contains(neighborCell));
         }
     }
 
