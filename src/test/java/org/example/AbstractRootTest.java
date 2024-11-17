@@ -3,10 +3,27 @@ package org.example;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+class fakeClass extends AbstractRoot {
+    private String name;
+    private int number;
+
+    public fakeClass(String name, int number) {
+        this.name = name;
+        this.number = number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+}
 
 public class AbstractRootTest {
 
@@ -106,5 +123,62 @@ public class AbstractRootTest {
 
         String expectedResult = "GameOfLifeCell {value: true, neighbors: [2], observers: []}";
         assertEquals(expectedResult, cell.toString());
+    }
+
+    @Test
+    public void testToString() {
+        fakeClass obj = new fakeClass("Test", 42);
+
+        String expected = "fakeClass {name: Test, number: 42}";
+        assertEquals(expected, obj.toString());
+    }
+
+    @Test
+    public void testEquals_sameState() {
+        fakeClass obj1 = new fakeClass("Test", 42);
+        fakeClass obj2 = new fakeClass("Test", 42);
+
+        assertTrue(obj1.equals(obj2));
+    }
+
+    @Test
+    public void testEquals_differentState() {
+
+        fakeClass obj1 = new fakeClass("Test", 42);
+        fakeClass obj2 = new fakeClass("Test", 43);
+
+        assertFalse(obj1.equals(obj2));
+    }
+
+    @Test
+    public void testEquals_null() {
+        fakeClass obj1 = new fakeClass("Test", 42);
+
+        assertFalse(obj1.equals(null));
+    }
+
+    @Test
+    public void testEquals_Class() {
+        fakeClass obj1 = new fakeClass("Test", 42);
+        String obj2 = "Test";
+
+        assertFalse(obj1.equals(obj2));
+    }
+
+    @Test
+    public void testHashCode_sameState() {
+
+        fakeClass obj1 = new fakeClass("Test", 42);
+        fakeClass obj2 = new fakeClass("Test", 42);
+
+        assertEquals(obj1.hashCode(), obj2.hashCode());
+    }
+
+    @Test
+    public void testHashCode_differentState() {
+        fakeClass obj1 = new fakeClass("Test", 42);
+        fakeClass obj2 = new fakeClass("Test", 43);
+
+        assertNotEquals(obj1.hashCode(), obj2.hashCode());
     }
 }

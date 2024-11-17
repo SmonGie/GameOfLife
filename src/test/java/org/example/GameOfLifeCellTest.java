@@ -221,4 +221,5 @@ class GameOfLifeCellTest {
         assertEquals(cell1.hashCode(), cell2.hashCode());
     }
 
+
 }
