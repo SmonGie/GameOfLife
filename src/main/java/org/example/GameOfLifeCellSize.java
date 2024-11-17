@@ -60,12 +60,12 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
+        } else if (obj != null) {
+            return false;//&& getClass() == obj.getClass();
         }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        GameOfLifeCellSize<?> other = (GameOfLifeCellSize<?>) obj;
-        return Objects.equals(this.cells, other.cells);
+        return false;
+        /*GameOfLifeCellSize<?> other = (GameOfLifeCellSize<?>) obj;
+        return Objects.equals(this.cells, other.cells);*/
     }
 
     public int hashCode() {

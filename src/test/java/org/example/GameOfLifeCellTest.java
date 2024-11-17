@@ -182,6 +182,28 @@ class GameOfLifeCellTest {
     }
 
     @Test
+    void testToString() {
+        GameOfLifeCell cell1 = new GameOfLifeCell();
+        cell1.updateState(false);
+        String expectedResult = "GameOfLifeCell {value: false, neighbors: [], observers: []}";
+        assertEquals(expectedResult, cell1.toString());
+        GameOfLifeCell neighbor1 = new GameOfLifeCell();
+        neighbor1.updateState(true);
+        GameOfLifeCell neighbor2 = new GameOfLifeCell();
+        neighbor2.updateState(true);
+        cell1.addNeighbor(neighbor1);
+        cell1.addNeighbor(neighbor2);
+        expectedResult = "GameOfLifeCell {value: false, neighbors: [2], observers: []}";
+        assertEquals(expectedResult, cell1.toString());
+        List<GameOfLifeCell> cellList = new ArrayList<>();
+        cellList.add(cell1);
+        GameOfLifeColumn golColumn = new GameOfLifeColumn(cellList);
+        expectedResult = "GameOfLifeCell {value: false, neighbors: [2], observers: [org.example.GameOfLifeColumn[cells=[GameOfLifeCell {value: false, neighbors: [2], observers: [org.example.GameOfLifeColumn[cells=java.util.ImmutableCollections$List]]}]]]}";
+        assertEquals(expectedResult.toString().substring(0, 86), cell1.toString().substring(0, 86));
+        
+    }
+
+    @Test
     void testEquals() {
         GameOfLifeCell cell1 = new GameOfLifeCell();
         GameOfLifeCell cell2 = new GameOfLifeCell();
@@ -190,6 +212,8 @@ class GameOfLifeCellTest {
         GameOfLifeCell neighbor1 = new GameOfLifeCell();
         neighbor1.updateState(true);
         GameOfLifeCell neighbor2 = new GameOfLifeCell();
+        neighbor2.updateState(true);
+        GameOfLifeCell neighbor3 = new GameOfLifeCell();
         neighbor2.updateState(true);
         cell1.addNeighbor(neighbor1);
         cell1.addNeighbor(neighbor2);
@@ -202,6 +226,9 @@ class GameOfLifeCellTest {
         assertFalse(cell1.equals(q));
         GameOfLifeCell q2 = null;
         assertFalse(cell1.equals(q2));
+        cell2.updateState(false);
+        cell2.addNeighbor(neighbor3);
+        assertFalse(cell1.equals(cell2));
     }
 
     @Test

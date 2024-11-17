@@ -70,9 +70,9 @@ class GameOfLifeCellSizeTest {
         GameOfLifeCellSize<GameOfLifeCell> cellSize2 = new GameOfLifeCellSize<>(cells) {
         };
         assertEquals(cellSize1.toString().substring(0, 34) + cellSize1.toString().
-                        substring(45, cellSize1.toString().length()),
+                        substring(cellSize1.toString().length() - 149, cellSize1.toString().length()),
                 cellSize2.toString().substring(0, 34) + cellSize2.toString().
-                        substring(45, cellSize2.toString().length()));
+                        substring(cellSize2.toString().length() - 149, cellSize2.toString().length()));
     }
 
     @Test

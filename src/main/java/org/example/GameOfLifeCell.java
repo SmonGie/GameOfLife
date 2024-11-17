@@ -92,19 +92,18 @@ public class GameOfLifeCell {
     }
 
     public String toString() {
-        Set<GameOfLifeCell> visited = new HashSet<>();
-        return toStringHelper(visited);
+        //Set<GameOfLifeCell> visited = new HashSet<>();
+        return toStringHelper();
     }
 
-    private String toStringHelper(Set<GameOfLifeCell> visited) {
-        if (!visited.add(this)) {
+    private String toStringHelper() {
+        /*if (!visited.add(this)) {
             return this.getClass().getSimpleName() + " {value: " + value + ", neighbors: [...], observers: [...] }";
-        }
-
+        }*/
         StringBuilder result = new StringBuilder(this.getClass().getSimpleName() + " {");
         result.append("value: ").append(value);
 
-        if (neighbors != null && !neighbors.isEmpty()) {
+        if (!neighbors.isEmpty()) { //neighbors != null &&
             result.append(", neighbors: [");
             result.append(neighbors.size());
             result.append("]");
@@ -112,7 +111,7 @@ public class GameOfLifeCell {
             result.append(", neighbors: []");
         }
 
-        if (observers != null && !observers.isEmpty()) {
+        if (!observers.isEmpty()) { //observers != null &&
             result.append(", observers: [");
             StringJoiner sj = new StringJoiner(", ");
             for (Object observer : observers) {
