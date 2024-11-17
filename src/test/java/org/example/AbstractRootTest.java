@@ -134,7 +134,7 @@ public class AbstractRootTest {
     }
 
     @Test
-    public void testEquals_sameState() {
+    public void testEqualsSameState() {
         fakeClass obj1 = new fakeClass("Test", 42);
         fakeClass obj2 = new fakeClass("Test", 42);
 
@@ -142,7 +142,7 @@ public class AbstractRootTest {
     }
 
     @Test
-    public void testEquals_differentState() {
+    public void testEqualsDifferentState() {
 
         fakeClass obj1 = new fakeClass("Test", 42);
         fakeClass obj2 = new fakeClass("Test", 43);
@@ -151,14 +151,14 @@ public class AbstractRootTest {
     }
 
     @Test
-    public void testEquals_null() {
+    public void testEqualsNull() {
         fakeClass obj1 = new fakeClass("Test", 42);
 
         assertFalse(obj1.equals(null));
     }
 
     @Test
-    public void testEquals_Class() {
+    public void testEqualsClass() {
         fakeClass obj1 = new fakeClass("Test", 42);
         String obj2 = "Test";
 
@@ -166,7 +166,7 @@ public class AbstractRootTest {
     }
 
     @Test
-    public void testHashCode_sameState() {
+    public void testHashCodeSameState() {
 
         fakeClass obj1 = new fakeClass("Test", 42);
         fakeClass obj2 = new fakeClass("Test", 42);
@@ -175,7 +175,7 @@ public class AbstractRootTest {
     }
 
     @Test
-    public void testHashCode_differentState() {
+    public void testHashCodeDifferentState() {
         fakeClass obj1 = new fakeClass("Test", 42);
         fakeClass obj2 = new fakeClass("Test", 43);
 
