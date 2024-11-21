@@ -28,20 +28,21 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         GameOfLifeBoard board = null;
         System.out.print("Czy chcesz wczytać planszę z pliku? (tak/nie): ");
-        PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
         String response = scanner.next();
+        PlainGameOfLifeSimulator simulator = new PlainGameOfLifeSimulator();
         if (response.equalsIgnoreCase("tak")) {
             board = loadBoardFromFile(scanner);
         }
 
         if (board == null) {
-            int width = getPositiveInteger(scanner, "Podaj liczbę wierszy planszy: ");
             int height = getPositiveInteger(scanner, "Podaj liczbę kolumn planszy: ");
+            int width = getPositiveInteger(scanner, "Podaj liczbę wierszy planszy: ");
             board = new GameOfLifeBoard(width, height);
         }
 
-        int generations = getPositiveInteger(scanner, "Podaj liczbę pokoleń do symulacji: ");
+        GameOfLifeBoard initialBoard = new GameOfLifeBoard(board);
 
+        int generations = getPositiveInteger(scanner, "Podaj liczbę pokoleń do symulacji: ");
         runSimulation(board, simulator, generations);
 
         System.out.print("Czy chcesz zapisać początkową planszę do pliku? (tak/nie): ");
@@ -49,7 +50,7 @@ public class Main {
             System.out.print("Podaj nazwę pliku: ");
             String fileName = scanner.next();
             try (Dao<GameOfLifeBoard> dao = GameOfLifeBoardDaoFactory.createFileDao(fileName)) {
-                dao.write(board);
+                dao.write(initialBoard);
                 System.out.println("Plansza zapisana do pliku: " + fileName);
             } catch (Exception e) {
                 System.err.println("Nie udało się zapisać planszy: " + e.getMessage());

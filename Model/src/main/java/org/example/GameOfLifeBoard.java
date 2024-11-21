@@ -37,6 +37,15 @@ public class GameOfLifeBoard implements Serializable {
         initializeNeighbors();
     }
 
+    public GameOfLifeBoard(GameOfLifeBoard other) {
+        this.width = other.width;
+        this.height = other.height;
+        this.board = new ArrayList<>();
+        for (GameOfLifeCell cell : other.board) {
+            this.board.add(new GameOfLifeCell(cell.getCellValue()));
+        }
+    }
+
     private void initializeCells() {
         List<GameOfLifeCell> cellList = new ArrayList<>();
         for (int i = 0; i < width * height; i++) {
@@ -85,9 +94,9 @@ public class GameOfLifeBoard implements Serializable {
     }
 
     public void setCustomBoard(List<GameOfLifeCell> customBoard) {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++) {
-                board.get(i * height + j).updateState(customBoard.get(i * height + j).getCellValue());
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                board.get(i * width + j).updateState(customBoard.get(i * width + j).getCellValue());
             }
         }
     }
@@ -101,7 +110,7 @@ public class GameOfLifeBoard implements Serializable {
     }
 
     public GameOfLifeCell getCell(int row, int col) {
-        return board.get(row * width + col);
+        return board.get(row * height + col);
     }
 
 
@@ -182,7 +191,7 @@ public class GameOfLifeBoard implements Serializable {
             }
         }
 
-        GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+        GameOfLifeBoard board = new GameOfLifeBoard(height, width);
         board.setCustomBoard(cells);
         return board;
     }
