@@ -22,9 +22,10 @@ package org.example;
 
 import org.apache.commons.lang3.builder.*;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GameOfLifeBoard {
+public class GameOfLifeBoard implements Serializable {
     private List<GameOfLifeCell> board;
     int width;
     int height;
@@ -32,15 +33,17 @@ public class GameOfLifeBoard {
     public GameOfLifeBoard(int width, int height) {
         this.width = width;
         this.height = height;
+        initializeCells();
+        initializeNeighbors();
+    }
 
-        GameOfLifeCell[] cells = new GameOfLifeCell[width * height];
-        for (int i = 0; i < cells.length; i++) {
-            cells[i] = new GameOfLifeCell();
+    private void initializeCells() {
+        List<GameOfLifeCell> cellList = new ArrayList<>();
+        for (int i = 0; i < width * height; i++) {
+            cellList.add(new GameOfLifeCell());
         }
-        List<GameOfLifeCell> cellList = new ArrayList<>(Arrays.asList(cells));
         Collections.shuffle(cellList);
         board = Collections.unmodifiableList(cellList);
-        initializeNeighbors();
     }
 
     private void initializeNeighbors() {
@@ -103,9 +106,9 @@ public class GameOfLifeBoard {
 
 
     public List<GameOfLifeCell> getGameOfLifeColumn(int columnIndex) {
-        List<GameOfLifeCell> column = new ArrayList<>(Collections.nCopies(height, new GameOfLifeCell()));
+        List<GameOfLifeCell> column = new ArrayList<>();
         for (int i = 0; i < height; i++) {
-            column.set(i, board.get(i * height + columnIndex));
+            column.add(getCell(i, columnIndex));
         }
         return Collections.unmodifiableList(column);
 
@@ -120,7 +123,7 @@ public class GameOfLifeBoard {
         for (GameOfLifeCell cell : board) {
             sj.add("GameOfLifeCell {value: " + cell.getCellValue() + "}");
         }
-        result.append(sj.toString());
+        result.append(sj);
         result.append("], ");
 
         result.append("width: ").append(width);
@@ -153,6 +156,35 @@ public class GameOfLifeBoard {
                 .append(width)
                 .append(height)
                 .toHashCode();
+    }
+
+    public static GameOfLifeBoard fromString(String data) {
+        String[] lines = data.split("\n");
+        int height = lines.length;
+        int width = lines[0].length();
+
+        for (String line : lines) {
+            if (line.length() != width) {
+                throw new IllegalArgumentException("Wszystkie wiersze muszą mieć tę samą długość.");
+            }
+            if (line.trim().isEmpty()) {
+                throw new IllegalArgumentException("Wiersze nie mogą być puste.");
+            }
+        }
+
+        List<GameOfLifeCell> cells = new ArrayList<>();
+        for (String line : lines) {
+            for (char ch : line.toCharArray()) {
+                if (ch != '1' && ch != '0') {
+                    throw new IllegalArgumentException("Plik musi zawierać tylko '1' i '0' bez odstępów.");
+                }
+                cells.add(new GameOfLifeCell(ch == '1'));
+            }
+        }
+
+        GameOfLifeBoard board = new GameOfLifeBoard(width, height);
+        board.setCustomBoard(cells);
+        return board;
     }
 
 }

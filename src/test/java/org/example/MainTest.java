@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MainTest {
     @Test
     public void mainTest() {
-        String simulatedInput = "5\n5\n3\n";
+        String simulatedInput = "3\nnie\n5\n5\nnie\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -43,17 +43,16 @@ class MainTest {
 
         System.setOut(originalOut);
         String output = outputStream.toString();
-        assertTrue(output.contains("Generation"));
-        assertTrue(output.contains("Generation 1"));
-        assertTrue(output.contains("Generation 2"));
-        assertTrue(output.contains("Generation 3"));
+        assertTrue(output.contains("==== Pokolenie 1 ===="));
+        assertTrue(output.contains("==== Pokolenie 2 ===="));
+        assertTrue(output.contains("==== Pokolenie 3 ===="));
 
         assertTrue(output.contains("O") || output.contains("."));
     }
 
     @Test
     public void mainTest_one_oneBoard() {
-        String simulatedInput = "1\n1\n3\n";
+        String simulatedInput = "3\nnie\n5\n5\nnie\n";
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -65,7 +64,7 @@ class MainTest {
         System.setOut(originalOut);
 
         String output = outputStream.toString();
-        assertTrue(output.contains("Generation"));
+        assertTrue(output.contains("Pokolenie"));
     }
 
 

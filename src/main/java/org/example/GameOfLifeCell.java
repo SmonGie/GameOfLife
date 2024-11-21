@@ -23,9 +23,10 @@ package org.example;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GameOfLifeCell {
+public class GameOfLifeCell implements Serializable {
     private boolean value;
     private final List<GameOfLifeCell> neighbors;
     private final List<CellObserver> observers;
@@ -35,6 +36,12 @@ public class GameOfLifeCell {
         value = rand.nextBoolean();
         neighbors = new ArrayList<>();
         observers = new ArrayList<>();
+    }
+
+    public GameOfLifeCell(boolean initialState) {
+        this.value = initialState;
+        this.neighbors = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
     public void addObserver(CellObserver observer) {
@@ -92,18 +99,14 @@ public class GameOfLifeCell {
     }
 
     public String toString() {
-        //Set<GameOfLifeCell> visited = new HashSet<>();
         return toStringHelper();
     }
 
     private String toStringHelper() {
-        /*if (!visited.add(this)) {
-            return this.getClass().getSimpleName() + " {value: " + value + ", neighbors: [...], observers: [...] }";
-        }*/
         StringBuilder result = new StringBuilder(this.getClass().getSimpleName() + " {");
         result.append("value: ").append(value);
 
-        if (!neighbors.isEmpty()) { //neighbors != null &&
+        if (!neighbors.isEmpty()) {
             result.append(", neighbors: [");
             result.append(neighbors.size());
             result.append("]");
@@ -111,13 +114,13 @@ public class GameOfLifeCell {
             result.append(", neighbors: []");
         }
 
-        if (!observers.isEmpty()) { //observers != null &&
+        if (!observers.isEmpty()) {
             result.append(", observers: [");
             StringJoiner sj = new StringJoiner(", ");
             for (Object observer : observers) {
                 sj.add(observer.toString());
             }
-            result.append(sj.toString());
+            result.append(sj);
             result.append("]");
         } else {
             result.append(", observers: []");
