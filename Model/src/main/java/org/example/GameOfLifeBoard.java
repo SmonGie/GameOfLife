@@ -173,11 +173,11 @@ public class GameOfLifeBoard implements Serializable {
         int width = lines[0].length();
 
         for (String line : lines) {
-            if (line.length() != width) {
-                throw new IllegalArgumentException("Wszystkie wiersze muszą mieć tę samą długość.");
-            }
             if (line.trim().isEmpty()) {
                 throw new IllegalArgumentException("Wiersze nie mogą być puste.");
+            }
+            if (line.length() != width) {
+                throw new IllegalArgumentException("Wszystkie wiersze muszą mieć tę samą długość.");
             }
         }
 

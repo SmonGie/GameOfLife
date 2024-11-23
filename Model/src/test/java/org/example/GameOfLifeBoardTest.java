@@ -446,4 +446,20 @@ class GameOfLifeBoardTest {
         assertEquals(board1.hashCode(), board2.hashCode());
     }
 
+    @Test
+    void testFromStringExceptions() {
+        IllegalArgumentException exception1 = assertThrows(IllegalArgumentException.class, () -> {
+            GameOfLifeBoard.fromString("111\n1010\n000");
+        });
+        assertEquals("Wszystkie wiersze muszą mieć tę samą długość.", exception1.getMessage());
+        IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> {
+            GameOfLifeBoard.fromString("111\n\n000");
+        });
+        assertEquals("Wiersze nie mogą być puste.", exception2.getMessage());
+        IllegalArgumentException exception3 = assertThrows(IllegalArgumentException.class, () -> {
+            GameOfLifeBoard.fromString("111\nqwe\n000");
+        });
+        assertEquals("Plik musi zawierać tylko '1' i '0' bez odstępów.", exception3.getMessage());
+    }
+
 }
