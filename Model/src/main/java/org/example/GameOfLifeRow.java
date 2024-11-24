@@ -21,9 +21,11 @@ package org.example;
  */
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GameOfLifeRow<T extends GameOfLifeCell> extends GameOfLifeCellSize<T> implements CellObserver {
+public class GameOfLifeRow<T extends GameOfLifeCell> extends GameOfLifeCellSize<T> implements CellObserver,
+        Serializable {
     public GameOfLifeRow(List<T> cells) {
         super(cells);
         for (GameOfLifeCell cell : cells) {

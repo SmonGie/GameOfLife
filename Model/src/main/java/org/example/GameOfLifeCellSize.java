@@ -27,10 +27,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> {
+public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> implements Serializable {
     protected List<T> cells;
 
     public GameOfLifeCellSize(List<T> cells) {

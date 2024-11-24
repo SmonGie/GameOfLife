@@ -1,1 +1,0 @@
-GameOfLifeBoard {board: [GameOfLifeCell {value: true}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}, GameOfLifeCell {value: false}], width: 3, height: 3}
