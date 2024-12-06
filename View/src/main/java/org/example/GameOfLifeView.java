@@ -22,8 +22,8 @@ public class GameOfLifeView extends Application {
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(15));
 
-        Label titleLabel = new Label("Game of Life");
-        Label setSize = new Label("Wymiary planszy:");
+        final Label titleLabel = new Label("Game of Life");
+        final Label setSize = new Label("Wymiary planszy:");
         TextField sizeField = new TextField();
         sizeField.setPromptText("Wymiary planszy (min 4, max 20)");
 
@@ -108,7 +108,7 @@ public class GameOfLifeView extends Application {
         }
         Density boardDensity = Density.fromString(density);
         Random rand = new Random();
-        int numCellsToLive = (board.getWidth() * board.getHeight() * boardDensity.getPercentage()) / 100;
+        int numCellsToLive = board.getWidth() * board.getHeight() * boardDensity.getPercentage() / 100;
 
         Set<String> liveCellsSet = new HashSet<>();
 
