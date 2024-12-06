@@ -247,6 +247,46 @@ class GameOfLifeCellTest {
         cell2.addNeighbor(neighbor2);
         assertEquals(cell1.hashCode(), cell2.hashCode());
     }
+    @Test
+    void testCompareTo() {
+        GameOfLifeCell cell1 = new GameOfLifeCell(true);
+        GameOfLifeCell cell2 = new GameOfLifeCell(false);
+        GameOfLifeCell cell3 = new GameOfLifeCell(true);
 
+        assertTrue(cell1.compareTo(cell2) > 0);
 
+        assertEquals(0, cell1.compareTo(cell3));
+
+        assertTrue(cell2.compareTo(cell1) < 0);
+    }
+
+    @Test
+    void testClone() {
+        GameOfLifeCell cell1 = new GameOfLifeCell(true);
+        GameOfLifeCell neighbor1 = new GameOfLifeCell(false);
+        GameOfLifeCell neighbor2 = new GameOfLifeCell(true);
+
+        cell1.addNeighbor(neighbor1);
+        cell1.addNeighbor(neighbor2);
+
+        GameOfLifeCell clonedCell = cell1.clone();
+
+        assertEquals(cell1.getCellValue(), clonedCell.getCellValue());
+        assertEquals(cell1.getNeighbors().size(), clonedCell.getNeighbors().size());
+
+        assertNotSame(cell1, clonedCell);
+
+        assertNotSame(cell1.getNeighbors(), clonedCell.getNeighbors());
+        assertEquals(cell1.getNeighbors().size(), clonedCell.getNeighbors().size());
+
+        assertNotSame(cell1.getNeighbors().get(0), clonedCell.getNeighbors().get(0));
+        assertNotSame(cell1.getNeighbors().get(1), clonedCell.getNeighbors().get(1));
+    }
+
+    @Test
+    public void testCompareToNull() {
+        GameOfLifeCell cell = new GameOfLifeCell(true);
+
+        assertEquals(1, cell.compareTo(null));
+    }
 }

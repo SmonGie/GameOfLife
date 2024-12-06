@@ -67,6 +67,14 @@ public abstract class GameOfLifeCellSize<T extends GameOfLifeCell> implements Se
         return false;
     }
 
+    public List<T> getCells() {
+        return cells;
+    }
+
+    public void setCells(List<T> cells) {
+        this.cells = cells;
+    }
+
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(cells)

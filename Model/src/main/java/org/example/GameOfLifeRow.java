@@ -22,10 +22,11 @@ package org.example;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameOfLifeRow<T extends GameOfLifeCell> extends GameOfLifeCellSize<T> implements CellObserver,
-        Serializable {
+        Serializable, Cloneable {
     public GameOfLifeRow(List<T> cells) {
         super(cells);
         for (GameOfLifeCell cell : cells) {
@@ -37,5 +38,23 @@ public class GameOfLifeRow<T extends GameOfLifeCell> extends GameOfLifeCellSize<
     public void update() {
         System.out.println("Wiersz zaktualizowany: Żywe komórki = " + countAliveCells() + ", Martwe komórki = "
                 + countDeadCells());
+    }
+
+    @Override
+    public GameOfLifeRow<T> clone() {
+        try {
+            GameOfLifeRow<T> cloned = (GameOfLifeRow<T>) super.clone();
+
+            List<T> clonedCells = new ArrayList<>();
+            for (T cell : getCells()) {
+                clonedCells.add((T) cell.clone());
+            }
+
+            cloned.setCells(clonedCells);
+
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("CloneNotSupportedException", e);
+        }
     }
 }

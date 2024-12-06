@@ -26,10 +26,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.io.Serializable;
 import java.util.*;
 
-public class GameOfLifeCell implements Serializable {
+public class GameOfLifeCell implements Serializable, Comparable<GameOfLifeCell>, Cloneable {
     private boolean value;
-    private final List<GameOfLifeCell> neighbors;
-    private final List<CellObserver> observers;
+    private List<GameOfLifeCell> neighbors;
+    private List<CellObserver> observers;
     private static final Random rand = new Random();
 
     public GameOfLifeCell() {
@@ -168,5 +168,34 @@ public class GameOfLifeCell implements Serializable {
 
         return result.toHashCode();
     }
+
+    @Override
+    public int compareTo(GameOfLifeCell other) {
+        if (other == null) {
+            return 1;
+        }
+        return Boolean.compare(this.value, other.value);
+    }
+
+    @Override
+    public GameOfLifeCell clone() {
+        try {
+            GameOfLifeCell cloned = (GameOfLifeCell) super.clone();
+
+            cloned.neighbors = new ArrayList<>(this.neighbors);
+            cloned.observers = new ArrayList<>(this.observers);
+
+            List<GameOfLifeCell> clonedNeighbors = new ArrayList<>();
+            for (GameOfLifeCell neighbor : this.neighbors) {
+                clonedNeighbors.add(neighbor.clone());
+            }
+            cloned.neighbors = clonedNeighbors;
+
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("CloneNotSupportedException", e);
+        }
+    }
+
 
 }

@@ -25,7 +25,7 @@ import org.apache.commons.lang3.builder.*;
 import java.io.Serializable;
 import java.util.*;
 
-public class GameOfLifeBoard implements Serializable {
+public class GameOfLifeBoard implements Serializable, Cloneable {
     private List<GameOfLifeCell> board;
     int width;
     int height;
@@ -195,5 +195,24 @@ public class GameOfLifeBoard implements Serializable {
         board.setCustomBoard(cells);
         return board;
     }
+
+    @Override
+    public GameOfLifeBoard clone() {
+        try {
+            GameOfLifeBoard cloned = (GameOfLifeBoard) super.clone();
+
+            List<GameOfLifeCell> clonedBoard = new ArrayList<>(this.board.size());
+            for (GameOfLifeCell cell : this.board) {
+                clonedBoard.add(new GameOfLifeCell(cell.getCellValue()));
+            }
+
+            cloned.board = clonedBoard;
+
+            return cloned;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("CloneNotSupportedException", e);
+        }
+    }
+
 
 }

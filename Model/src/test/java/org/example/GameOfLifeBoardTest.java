@@ -462,4 +462,32 @@ class GameOfLifeBoardTest {
         assertEquals("Plik musi zawierać tylko '1' i '0' bez odstępów.", exception3.getMessage());
     }
 
+    @Test
+    public void testClone() {
+        GameOfLifeBoard originalBoard = new GameOfLifeBoard(4, 4);
+
+        boolean[][] initialState = {
+                {false, false, false, false},
+                {false, true, false, false},
+                {true, true, true, false},
+                {false, true, false, false}
+        };
+        List<GameOfLifeCell> listInitState = new ArrayList<>();
+        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+            GameOfLifeCell expC = new GameOfLifeCell();
+            expC.setState(initialState[i / 4][i % 4]);
+            listInitState.add(expC);
+        }
+        originalBoard.setCustomBoard(listInitState);
+
+        GameOfLifeBoard clonedBoard = originalBoard.clone();
+
+        assertEquals(originalBoard.getWidth(), clonedBoard.getWidth());
+        assertEquals(originalBoard.getHeight(), clonedBoard.getHeight());
+        assertNotSame(originalBoard.getBoard(), clonedBoard.getBoard());
+
+        originalBoard.getCell(0, 0).updateState(true);
+        assertNotEquals(originalBoard.getCell(0, 0).getCellValue(), clonedBoard.getCell(0, 0).getCellValue());
+    }
+
 }
