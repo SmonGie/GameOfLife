@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="260.0" prefWidth="260.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.MyController">
+    <padding>
+        <Insets bottom="15" left="15" right="15" top="15" />
+    </padding>
+
+    <Label text="Game of Life" />
+    <Label text="Wymiary planszy:" />
+    <TextField fx:id="sizeField" promptText="Wymiary planszy (min 4, max 20)" />
+
+    <Label text="Zagęszczenie:" />
+    <TextField fx:id="densityField" promptText="Wybierz zagęszczenie: mały, średni, duży" />
+
+    <Button onAction="#startSimulation" text="Start" />
+</VBox>
