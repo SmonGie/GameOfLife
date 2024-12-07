@@ -14,12 +14,12 @@ public enum Density {
     }
 
     public static Density fromString(String text) {
-        switch (text.toLowerCase()) {
-            case "mały":
+        switch (text) {
+            case "LOW":
                 return LOW;
-            case "średni":
+            case "MEDIUM":
                 return MEDIUM;
-            case "duży":
+            case "HIGH":
                 return HIGH;
             default:
                 return LOW;

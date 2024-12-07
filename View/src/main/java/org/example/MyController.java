@@ -5,6 +5,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -18,11 +19,16 @@ public class MyController {
     private TextField sizeField;
 
     @FXML
-    private TextField densityField;
+    private ComboBox<Density> comboBox = new ComboBox<>();
+
+    @FXML
+    public void initialize() {
+        comboBox.getItems().setAll(Density.values());
+        comboBox.setValue(Density.LOW);
+    }
 
     public void startSimulation() {
         String sizeText = sizeField.getText();
-        String densityText = densityField.getText();
 
         try {
             int size = Integer.parseInt(sizeText);
@@ -31,13 +37,8 @@ public class MyController {
                 return;
             }
 
-            Density density = Density.fromString(densityText);
-            if (density == Density.LOW && !densityText.equalsIgnoreCase("mały")) {
-                showError("Nie prawidłowe zagęszczenie, zostanie uzyte małe zagęszczenie");
-            }
-
             GameOfLifeBoard initialBoard = new GameOfLifeBoard(size, size);
-            initializeBoardDensity(initialBoard, densityText);
+            initializeBoardDensity(initialBoard, comboBox.getValue().toString());
 
             showBoard(initialBoard);
         } catch (NumberFormatException e) {
@@ -70,7 +71,7 @@ public class MyController {
             }
         }
 
-        Scene scene = new Scene(layout, 500, 450);
+        Scene scene = new Scene(layout, 700, 700);
         stage.setScene(scene);
         stage.setTitle("Plansza");
         stage.show();
@@ -84,10 +85,8 @@ public class MyController {
         }
         Density boardDensity = Density.fromString(density);
         Random rand = new Random();
-        int numCellsToLive = board.getWidth() * board.getHeight() * boardDensity.getPercentage() / 100;
-
+        int numCellsToLive = (int) (board.getWidth() * board.getHeight() * boardDensity.getPercentage() / 100.0f);
         Set<String> liveCellsSet = new HashSet<>();
-
         while (liveCellsSet.size() < numCellsToLive) {
             int row = rand.nextInt(board.getHeight());
             int col = rand.nextInt(board.getWidth());
