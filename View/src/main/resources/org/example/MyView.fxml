@@ -4,18 +4,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox alignment="CENTER" prefHeight="260.0" prefWidth="260.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1"
       xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.MyController">
     <padding>
         <Insets bottom="15" left="15" right="15" top="15"/>
     </padding>
 
-    <Label text="Game of Life"/>
-    <Label text="Wymiary planszy:"/>
+    <Label fx:id="gameOfLifeLabel" text="Game of Life"/>
+    <Label fx:id="boardSizeLabel" text="Wymiary planszy:"/>
     <TextField fx:id="sizeField" promptText="Wymiary planszy (min 4, max 20)"/>
 
-    <Label text="Zagęszczenie:"/>
+    <Label fx:id="densityLabel" text="Zagęszczenie:"/>
     <ComboBox fx:id="comboBox"/>
 
-    <Button onAction="#startSimulation" text="Start"/>
+    <Button fx:id="startButton" onAction="#startSimulation" text="Start"/>
+    <Button fx:id="saveBoardButton" onAction="#saveBoard" text="Zapisz planszę"/>
+    <Button fx:id="loadBoardButton" onAction="#loadBoard" text="Odczytaj planszę"/>
+<!--    <ComboBox fx:id="languageComboBox" onAction="#changeLanguage" prefWidth="150.0">-->
+<!--        <items>-->
+<!--            <FXCollections fx:factory="observableArrayList">-->
+<!--                <String fx:value="pl" />-->
+<!--                <String fx:value="en" />-->
+<!--                <String fx:value="es" />-->
+<!--            </FXCollections>-->
+<!--        </items>-->
+<!--    </ComboBox>-->
 </VBox>

@@ -3,23 +3,38 @@ package org.example;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 public class MyController {
     @FXML
-    private TextField sizeField;
-
+    private Label gameOfLifeLabel;
     @FXML
-    private ComboBox<Density> comboBox = new ComboBox<>();
+    private Label boardSizeLabel;
+    @FXML
+    private TextField sizeField;
+    @FXML
+    private Label densityLabel;
+    @FXML
+    private ComboBox<Density> comboBox;
+    @FXML
+    private Button startButton;
+    @FXML
+    private Button saveBoardButton;
+    @FXML
+    private Button loadBoardButton;
+
+
+    private GameOfLifeBoard clonedBoard;
+    private GameOfLifeBoard currentBoard;
 
     @FXML
     public void initialize() {
@@ -37,10 +52,10 @@ public class MyController {
                 return;
             }
 
-            GameOfLifeBoard initialBoard = new GameOfLifeBoard(size, size);
-            initializeBoardDensity(initialBoard, comboBox.getValue().toString());
-
-            showBoard(initialBoard);
+            currentBoard = new GameOfLifeBoard(size, size);
+            initializeBoardDensity(currentBoard, comboBox.getValue().toString());
+            clonedBoard = new GameOfLifeBoard(currentBoard);
+            showBoard(currentBoard);
         } catch (NumberFormatException e) {
             showError("Nieprawidłowy format danych");
         }
@@ -49,6 +64,14 @@ public class MyController {
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Błąd");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showInfo(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informacja");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
@@ -66,6 +89,15 @@ public class MyController {
 
                 cellButton.setText(cell.getCellValue() ? "O" : ".");
                 cellButton.setMinSize(30, 30);
+
+                final int row = i;
+                final int col = j;
+
+                cellButton.setOnAction(e -> {
+                    board.toggleCellState(row, col);
+                    updateBoardDisplay(board, layout);
+                    // System.out.println(board.getBoard());
+                });
 
                 layout.add(cellButton, j, i);
             }
@@ -98,4 +130,62 @@ public class MyController {
             }
         }
     }
+
+    private void updateBoardDisplay(GameOfLifeBoard board, GridPane layout) {
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                Button cellButton = (Button) layout.getChildren().get(i * board.getWidth() + j);
+                GameOfLifeCell cell = board.getCell(i, j);
+                cellButton.setText(cell.getCellValue() ? "O" : ".");
+            }
+        }
+    }
+
+    @FXML
+    public void saveBoard() {
+        if (currentBoard == null) {
+            showError("Nie utworzono jeszcze planszy.");
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                String originalFileName = file.getAbsolutePath() + ".original";
+                try (FileGameOfLifeBoardDaoOriginalState dao = new FileGameOfLifeBoardDaoOriginalState(
+                        file.getAbsolutePath(), originalFileName)) {
+                    dao.write(currentBoard);
+                    dao.saveOriginalBoard(clonedBoard);
+                    showInfo("Plansza została zapisana wraz z oryginalnym stanem.");
+                }
+            } catch (IOException e) {
+                showError("Wystąpił błąd podczas zapisywania planszy.");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    @FXML
+    public void loadBoard() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            try (FileGameOfLifeBoardDao dao = new FileGameOfLifeBoardDao(file.getAbsolutePath())) {
+                currentBoard = dao.read();
+                showBoard(currentBoard);
+                showInfo("Plansza została wczytana.");
+            } catch (IOException e) {
+                showError("Wystąpił błąd podczas wczytywania planszy.");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 }

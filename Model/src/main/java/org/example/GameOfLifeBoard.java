@@ -142,6 +142,12 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
         return result.toString();
     }
 
+    public void toggleCellState(int row, int col) {
+        GameOfLifeCell cell = getCell(row, col);
+        boolean newState = !cell.getCellValue();
+        cell.setState(newState);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
