@@ -55,6 +55,10 @@ public class MyController {
     public void changeLanguage(String languageCode) {
         Locale newLocale = new Locale(languageCode);
         bundle = ResourceBundle.getBundle("org.example.Messages", newLocale);
+        updateUI();
+    }
+
+    private void updateUI() {
         gameOfLifeLabel.setText(bundle.getString("gameOfLifeLabel"));
         boardSizeLabel.setText(bundle.getString("boardSizeLabel"));
         densityLabel.setText(bundle.getString("densityLabel"));
@@ -62,7 +66,6 @@ public class MyController {
         saveBoardButton.setText(bundle.getString("saveBoardButton"));
         loadBoardButton.setText(bundle.getString("loadBoardButton"));
     }
-
 
     public void startSimulation() {
         String sizeText = sizeField.getText();
