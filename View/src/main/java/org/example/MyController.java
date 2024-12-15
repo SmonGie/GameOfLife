@@ -10,9 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 public class MyController {
     @FXML
@@ -32,6 +30,10 @@ public class MyController {
     @FXML
     private Button loadBoardButton;
 
+    @FXML
+    private ComboBox<String> languageComboBox;
+
+    private ResourceBundle bundle;
 
     private GameOfLifeBoard clonedBoard;
     private GameOfLifeBoard currentBoard;
@@ -40,7 +42,27 @@ public class MyController {
     public void initialize() {
         comboBox.getItems().setAll(Density.values());
         comboBox.setValue(Density.LOW);
+
+        languageComboBox.setValue("en");
+        changeLanguage("en");
     }
+
+    public void changeLanguageFromComboBox() {
+        String selectedLanguage = languageComboBox.getValue();
+        changeLanguage(selectedLanguage);
+    }
+
+    public void changeLanguage(String languageCode) {
+        Locale newLocale = new Locale(languageCode);
+        bundle = ResourceBundle.getBundle("org.example.Messages", newLocale);
+        gameOfLifeLabel.setText(bundle.getString("gameOfLifeLabel"));
+        boardSizeLabel.setText(bundle.getString("boardSizeLabel"));
+        densityLabel.setText(bundle.getString("densityLabel"));
+        startButton.setText(bundle.getString("startButton"));
+        saveBoardButton.setText(bundle.getString("saveBoardButton"));
+        loadBoardButton.setText(bundle.getString("loadBoardButton"));
+    }
+
 
     public void startSimulation() {
         String sizeText = sizeField.getText();
