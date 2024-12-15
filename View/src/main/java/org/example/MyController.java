@@ -5,8 +5,10 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,12 +41,58 @@ public class MyController {
     private GameOfLifeBoard currentBoard;
 
     @FXML
+    private Text author1Text;
+
+    @FXML
+    private Text author2Text;
+
+    private ResourceBundle authorsBundle;
+
+    @FXML
     public void initialize() {
         comboBox.getItems().setAll(Density.values());
+        translateDensityComboBox();
         comboBox.setValue(Density.LOW);
 
         languageComboBox.setValue("en");
         changeLanguage("en");
+
+        authorsBundle = ResourceBundle.getBundle("org.example.AuthorsResourceBundle");
+        author1Text.setText(authorsBundle.getString("author1"));
+        author2Text.setText(authorsBundle.getString("author2"));
+    }
+
+    private void translateDensityComboBox() {
+        comboBox.setConverter(new StringConverter<>() {
+            @Override
+            public String toString(Density density) {
+                if (density == null) {
+                    return "";
+                }
+                switch (density) {
+                    case LOW:
+                        return bundle.getString("densityLOW");
+                    case MEDIUM:
+                        return bundle.getString("densityMEDIUM");
+                    case HIGH:
+                        return bundle.getString("densityHIGH");
+                    default:
+                        return density.toString();
+                }
+            }
+
+            @Override
+            public Density fromString(String string) {
+                if (string.equals(bundle.getString("densityLOW"))) {
+                    return Density.LOW;
+                } else if (string.equals(bundle.getString("densityMEDIUM"))) {
+                    return Density.MEDIUM;
+                } else if (string.equals(bundle.getString("densityHIGH"))) {
+                    return Density.HIGH;
+                }
+                return null;
+            }
+        });
     }
 
     public void changeLanguageFromComboBox() {
@@ -65,6 +113,12 @@ public class MyController {
         startButton.setText(bundle.getString("startButton"));
         saveBoardButton.setText(bundle.getString("saveBoardButton"));
         loadBoardButton.setText(bundle.getString("loadBoardButton"));
+        sizeField.setPromptText(bundle.getString("sizeField"));
+
+        translateDensityComboBox();
+        Density currentValue = comboBox.getValue();
+        comboBox.setValue(null);
+        comboBox.setValue(currentValue);
     }
 
     public void startSimulation() {
@@ -73,7 +127,7 @@ public class MyController {
         try {
             int size = Integer.parseInt(sizeText);
             if (size < 4 || size > 20) {
-                showError("Rozmiar planszy musi być między 4 a 20.");
+                showError("sizeERROR");
                 return;
             }
 
@@ -82,23 +136,23 @@ public class MyController {
             clonedBoard = new GameOfLifeBoard(currentBoard);
             showBoard(currentBoard);
         } catch (NumberFormatException e) {
-            showError("Nieprawidłowy format danych");
+            showError("dataFormatERROR");
         }
     }
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Błąd");
+        alert.setTitle(bundle.getString("ErrorTitle"));
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(bundle.getString(message));
         alert.showAndWait();
     }
 
     private void showInfo(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Informacja");
+        alert.setTitle(bundle.getString("InfoTitle"));
         alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(bundle.getString(message));
         alert.showAndWait();
     }
 
@@ -121,7 +175,7 @@ public class MyController {
                 cellButton.setOnAction(e -> {
                     board.toggleCellState(row, col);
                     updateBoardDisplay(board, layout);
-                    // System.out.println(board.getBoard());
+                    //System.out.println(board.getBoard());
                 });
 
                 layout.add(cellButton, j, i);
@@ -130,7 +184,7 @@ public class MyController {
 
         Scene scene = new Scene(layout, 700, 700);
         stage.setScene(scene);
-        stage.setTitle("Plansza");
+        stage.setTitle(bundle.getString("BoardTitle"));
         stage.show();
     }
 
@@ -169,7 +223,7 @@ public class MyController {
     @FXML
     public void saveBoard() {
         if (currentBoard == null) {
-            showError("Nie utworzono jeszcze planszy.");
+            showError("noBoardERROR");
             return;
         }
 
@@ -184,10 +238,10 @@ public class MyController {
                         file.getAbsolutePath(), originalFileName)) {
                     dao.write(currentBoard);
                     dao.saveOriginalBoard(clonedBoard);
-                    showInfo("Plansza została zapisana wraz z oryginalnym stanem.");
+                    showInfo("saveSuccesInfo");
+                } catch (IOException e) {
+                    showError("saveBoardERROR");
                 }
-            } catch (IOException e) {
-                showError("Wystąpił błąd podczas zapisywania planszy.");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -204,9 +258,11 @@ public class MyController {
             try (FileGameOfLifeBoardDao dao = new FileGameOfLifeBoardDao(file.getAbsolutePath())) {
                 currentBoard = dao.read();
                 showBoard(currentBoard);
-                showInfo("Plansza została wczytana.");
+                showInfo("loadSuccesInfo");
             } catch (IOException e) {
-                showError("Wystąpił błąd podczas wczytywania planszy.");
+                showError("loadBoardERROR");
+            } catch (IllegalArgumentException e) {
+                showError("loadBoardERROR");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

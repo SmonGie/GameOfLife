@@ -144,8 +144,7 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
 
     public void toggleCellState(int row, int col) {
         GameOfLifeCell cell = getCell(row, col);
-        boolean newState = !cell.getCellValue();
-        cell.setState(newState);
+        cell.setState(!cell.getCellValue());
     }
 
     @Override
