@@ -13,7 +13,7 @@
         <Insets bottom="15" left="15" right="15" top="15"/>
     </padding>
 
-    <Label fx:id="gameOfLifeLabel" text="Game of Life"/>
+    <Label fx:id="gameOfLifeLabel" text="gameOfLifeLabel"/>
     <Label fx:id="boardSizeLabel" text="Wymiary planszy:"/>
     <TextField fx:id="sizeField" promptText="Wymiary planszy (min 4, max 20)"/>
 
@@ -24,7 +24,7 @@
     <Button fx:id="saveBoardButton" onAction="#saveBoard" text="Zapisz planszę"/>
     <Button fx:id="loadBoardButton" onAction="#loadBoard" text="Odczytaj planszę"/>
     <ComboBox fx:id="languageComboBox" onAction="#changeLanguageFromComboBox"
-              promptText="Choose Language" editable="false">
+              promptText="Choose Language">
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <String fx:value="pl"/>

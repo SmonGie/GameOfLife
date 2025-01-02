@@ -31,7 +31,8 @@ public class MyController {
     private Button saveBoardButton;
     @FXML
     private Button loadBoardButton;
-
+    @FXML
+    private Button doStepButton;
     @FXML
     private ComboBox<String> languageComboBox;
 
@@ -48,6 +49,10 @@ public class MyController {
 
     private ResourceBundle authorsBundle;
 
+    private GridPane layout;
+
+    private PlainGameOfLifeSimulator simulator;
+
     @FXML
     public void initialize() {
         comboBox.getItems().setAll(Density.values());
@@ -60,6 +65,7 @@ public class MyController {
         authorsBundle = ResourceBundle.getBundle("org.example.AuthorsResourceBundle");
         author1Text.setText(authorsBundle.getString("author1"));
         author2Text.setText(authorsBundle.getString("author2"));
+        simulator = new PlainGameOfLifeSimulator();
     }
 
     private void translateDensityComboBox() {
@@ -158,34 +164,51 @@ public class MyController {
 
     private void showBoard(GameOfLifeBoard board) {
         Stage stage = new Stage();
-        GridPane layout = new GridPane();
+        layout = new GridPane();
         layout.setPadding(new Insets(15));
+        layout.setHgap(3);
+        layout.setVgap(3);
 
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
                 Button cellButton = new Button();
                 GameOfLifeCell cell = board.getCell(i, j);
 
-                cellButton.setText(cell.getCellValue() ? "O" : ".");
                 cellButton.setMinSize(30, 30);
 
-                final int row = i;
-                final int col = j;
-
-                cellButton.setOnAction(e -> {
-                    board.toggleCellState(row, col);
-                    updateBoardDisplay(board, layout);
-                    //System.out.println(board.getBoard());
-                });
-
+                GameOfLifeCellAdapter adapter = new GameOfLifeCellAdapter(cell, cellButton);
+                adapter.updateButtonAppearance(cell.getState());
                 layout.add(cellButton, j, i);
+
             }
         }
+
+        Button doStepButton = new Button("Do Step");
+        doStepButton.setOnAction(event -> doStep(board));
+
+        GridPane.setConstraints(doStepButton, 0, board.getHeight());
+        layout.add(doStepButton, 0, board.getHeight(), board.getWidth(), 1);
 
         Scene scene = new Scene(layout, 700, 700);
         stage.setScene(scene);
         stage.setTitle(bundle.getString("BoardTitle"));
         stage.show();
+    }
+
+    private void doStep(GameOfLifeBoard board) {
+        board.doSimulationStep(simulator);
+        updateBoardDisplay(board);
+    }
+
+    private void updateBoardDisplay(GameOfLifeBoard board) {
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                Button cellButton = (Button) layout.getChildren().get(i * board.getWidth() + j);
+                GameOfLifeCell cell = board.getCell(i, j);
+                GameOfLifeCellAdapter adapter = new GameOfLifeCellAdapter(cell, cellButton);
+                adapter.updateButtonAppearance(cell.getState());
+            }
+        }
     }
 
     private void initializeBoardDensity(GameOfLifeBoard board, String density) {
@@ -210,16 +233,6 @@ public class MyController {
         }
     }
 
-    private void updateBoardDisplay(GameOfLifeBoard board, GridPane layout) {
-        for (int i = 0; i < board.getHeight(); i++) {
-            for (int j = 0; j < board.getWidth(); j++) {
-                Button cellButton = (Button) layout.getChildren().get(i * board.getWidth() + j);
-                GameOfLifeCell cell = board.getCell(i, j);
-                cellButton.setText(cell.getCellValue() ? "O" : ".");
-            }
-        }
-    }
-
     @FXML
     public void saveBoard() {
         if (currentBoard == null) {
@@ -238,7 +251,7 @@ public class MyController {
                         file.getAbsolutePath(), originalFileName)) {
                     dao.write(currentBoard);
                     dao.saveOriginalBoard(clonedBoard);
-                    showInfo("saveSuccesInfo");
+                    showInfo("saveSuccessInfo");
                 } catch (IOException e) {
                     showError("saveBoardERROR");
                 }
@@ -251,14 +264,13 @@ public class MyController {
     @FXML
     public void loadBoard() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
         File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
             try (FileGameOfLifeBoardDao dao = new FileGameOfLifeBoardDao(file.getAbsolutePath())) {
                 currentBoard = dao.read();
                 showBoard(currentBoard);
-                showInfo("loadSuccesInfo");
+                showInfo("loadSuccessInfo");
             } catch (IOException e) {
                 showError("loadBoardERROR");
             } catch (IllegalArgumentException e) {
