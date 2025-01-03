@@ -9,6 +9,11 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import org.example.Exception.BoardSizeException;
+import org.example.Exception.GameOfLifeBoardException;
+import org.example.Exception.InvalidActionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,6 +57,8 @@ public class MyController {
     private GridPane layout;
 
     private PlainGameOfLifeSimulator simulator;
+
+    private static final Logger logger = LoggerFactory.getLogger(MyController.class);
 
     @FXML
     public void initialize() {
@@ -133,20 +140,34 @@ public class MyController {
         try {
             int size = Integer.parseInt(sizeText);
             if (size < 4 || size > 20) {
-                showError("sizeERROR");
-                return;
+                throw new BoardSizeException("Size must be between 4 and 20");
+            }
+
+            if (comboBox.getValue() == null) {
+                throw new InvalidActionException("Density must be selected.");
             }
 
             currentBoard = new GameOfLifeBoard(size, size);
             initializeBoardDensity(currentBoard, comboBox.getValue().toString());
             clonedBoard = new GameOfLifeBoard(currentBoard);
             showBoard(currentBoard);
-        } catch (NumberFormatException e) {
+        }   catch (NumberFormatException e) {
+            logger.error("Invalid number format encountered: {}", e.getMessage());
             showError("dataFormatERROR");
+        }   catch (InvalidActionException e) {
+            logger.error("Invalid action error: {}", e.getMessage());
+            showError("invalidActionError");
+        }   catch (BoardSizeException e) {
+            logger.error("Board size error: {}", e.getMessage());
+            showError("sizeERROR");
+        }   catch (GameOfLifeBoardException e) {
+            logger.error("Game board initialization failed: {}", e.getMessage(), e);
+            showError("boardInitializationError");
         }
     }
 
     private void showError(String message) {
+        logger.error("Displaying error message: {}", message);
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(bundle.getString("ErrorTitle"));
         alert.setHeaderText(null);
@@ -155,6 +176,7 @@ public class MyController {
     }
 
     private void showInfo(String message) {
+        logger.info("Displaying info message: {}", message);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(bundle.getString("InfoTitle"));
         alert.setHeaderText(null);
@@ -163,6 +185,7 @@ public class MyController {
     }
 
     private void showBoard(GameOfLifeBoard board) {
+        logger.info("Displaying the board with size {}x{}", board.getHeight(), board.getWidth());
         Stage stage = new Stage();
         layout = new GridPane();
         layout.setPadding(new Insets(15));
@@ -196,11 +219,13 @@ public class MyController {
     }
 
     private void doStep(GameOfLifeBoard board) {
+        logger.info("Performing a simulation step.");
         board.doSimulationStep(simulator);
         updateBoardDisplay(board);
     }
 
     private void updateBoardDisplay(GameOfLifeBoard board) {
+        logger.info("Updating board display.");
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
                 Button cellButton = (Button) layout.getChildren().get(i * board.getWidth() + j);
@@ -211,7 +236,14 @@ public class MyController {
         }
     }
 
-    private void initializeBoardDensity(GameOfLifeBoard board, String density) {
+    private void initializeBoardDensity(GameOfLifeBoard board, String density) throws GameOfLifeBoardException {
+        logger.info("Initializing board density for density: {}", density);
+        if (board == null) {
+            throw new GameOfLifeBoardException("Board cannot be null.");
+        }
+        if (density == null || density.isEmpty()) {
+            throw new GameOfLifeBoardException("Density must be specified.");
+        }
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
                 board.getCell(i, j).setState(false);
@@ -236,6 +268,7 @@ public class MyController {
     @FXML
     public void saveBoard() {
         if (currentBoard == null) {
+            logger.warn("Attempted to save board, but no board is currently set.");
             showError("noBoardERROR");
             return;
         }
@@ -251,11 +284,14 @@ public class MyController {
                         file.getAbsolutePath(), originalFileName)) {
                     dao.write(currentBoard);
                     dao.saveOriginalBoard(clonedBoard);
+                    logger.info("Board saved successfully to file: {}", file.getAbsolutePath());
                     showInfo("saveSuccessInfo");
                 } catch (IOException e) {
+                    logger.error("Error saving the board to file: {}", file.getAbsolutePath(), e);
                     showError("saveBoardERROR");
                 }
             } catch (Exception e) {
+                logger.error("Unexpected error during board save process", e);
                 throw new RuntimeException(e);
             }
         }
@@ -269,13 +305,17 @@ public class MyController {
         if (file != null) {
             try (FileGameOfLifeBoardDao dao = new FileGameOfLifeBoardDao(file.getAbsolutePath())) {
                 currentBoard = dao.read();
+                logger.info("Board loaded successfully from file: {}", file.getAbsolutePath());
                 showBoard(currentBoard);
                 showInfo("loadSuccessInfo");
             } catch (IOException e) {
+                logger.error("Error loading the board from file: {}", file.getAbsolutePath(), e);
                 showError("loadBoardERROR");
             } catch (IllegalArgumentException e) {
+                logger.error("Invalid data in the board file: {}", file.getAbsolutePath(), e);
                 showError("loadBoardERROR");
             } catch (Exception e) {
+                logger.error("Unexpected error during board load process", e);
                 throw new RuntimeException(e);
             }
         }

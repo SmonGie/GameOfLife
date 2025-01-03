@@ -1,0 +1,224 @@
+00:18:42.497 [JavaFX Application Thread] ERROR org.example.MyController - Invalid number format encountered: For input string: ""
+00:38:53.268 [JavaFX Application Thread] ERROR org.example.MyController - Invalid number format encountered: For input string: ""
+00:38:59.545 [JavaFX Application Thread] ERROR org.example.MyController - Board size error: Size must be between 4 and 20
+00:41:52.867 [JavaFX Application Thread] ERROR org.example.MyController - Board size error: Size must be between 4 and 20
+00:41:56.600 [JavaFX Application Thread] ERROR org.example.MyController - Board size error: Size must be between 4 and 20
+00:44:39.531 [main] INFO  org.example.MainApp - Launching Game of Life application.
+00:44:39.549 [JavaFX Application Thread] INFO  org.example.MainApp - Starting Game of Life application.
+00:44:40.622 [JavaFX Application Thread] INFO  org.example.MainApp - FXML loaded and stage is displayed.
+00:44:43.062 [JavaFX Application Thread] INFO  org.example.MyController - Initializing board density for density: LOW
+00:44:43.071 [JavaFX Application Thread] INFO  org.example.MyController - Displaying the board with size 5x5
+00:44:44.308 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:44:44.309 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:44:44.967 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:44:44.967 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:44:45.709 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:44:45.710 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:46:33.215 [main] INFO  org.example.MainApp - Launching Game of Life application.
+00:46:33.242 [JavaFX Application Thread] INFO  org.example.MainApp - Starting Game of Life application.
+00:46:34.298 [JavaFX Application Thread] INFO  org.example.MainApp - FXML loaded and stage is displayed.
+00:46:36.907 [JavaFX Application Thread] INFO  org.example.MyController - Initializing board density for density: LOW
+00:46:36.917 [JavaFX Application Thread] INFO  org.example.MyController - Displaying the board with size 6x6
+00:46:36.925 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.926 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.928 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.928 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.928 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.928 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.929 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.929 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.930 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.930 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.930 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.931 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.931 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.931 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.932 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.932 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.932 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.932 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.932 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:36.933 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.933 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.933 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.933 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.934 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.934 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.934 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.935 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.935 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.935 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.935 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.936 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.936 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.936 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.936 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.937 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.937 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.938 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.938 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:36.938 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:40.793 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Toggling cell state: current state = false
+00:46:40.794 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:40.796 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - New cell state = true
+00:46:41.589 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Toggling cell state: current state = false
+00:46:41.590 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:41.591 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - New cell state = true
+00:46:44.059 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:46:44.060 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:46:44.060 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.062 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.062 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.063 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.063 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.063 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.063 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.064 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.064 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.064 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.064 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.064 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.065 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.065 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.065 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.065 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.066 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.066 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.067 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.068 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.069 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.069 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.069 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.069 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.070 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.070 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.070 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.071 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.071 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:44.071 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:44.072 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:44.072 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:44.073 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:53.494 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.495 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.496 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.497 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.498 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.499 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.499 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.499 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.499 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.500 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.500 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.501 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:53.502 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:54.895 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Toggling cell state: current state = false
+00:46:54.895 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Alive
+00:46:54.896 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - New cell state = true
+00:46:57.879 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.880 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.881 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.882 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.882 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.882 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.882 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.882 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.883 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.884 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.885 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.885 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.885 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.886 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.886 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.886 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.886 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:57.886 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.381 [JavaFX Application Thread] INFO  org.example.MyController - Performing a simulation step.
+00:46:59.381 [JavaFX Application Thread] INFO  org.example.MyController - Updating board display.
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.382 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.383 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.384 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.384 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.384 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.384 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.385 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.385 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.385 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.385 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.385 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.386 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:46:59.388 [JavaFX Application Thread] INFO  org.example.GameOfLifeCellAdapter - Updating button appearance: cell is Dead
+00:58:28.040 [main] INFO  org.example.MainApp - Launching Game of Life application.
