@@ -63,8 +63,6 @@ public class PlainGameOfLifeSimulatorTest {
             expC.setState(expectedState[i / 4][i % 4]);
             listExpState.add(expC);
         }
-        System.out.println(listExpState);
-        System.out.println(board.getBoard());
         for (int i = 0; i < board.getBoard().size(); i++)
             assertEquals(listExpState.get(i).getState(), board.getBoard().get(i).getState());
     }
