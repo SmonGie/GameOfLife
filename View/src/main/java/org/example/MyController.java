@@ -9,9 +9,9 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
-import org.example.Exception.BoardSizeException;
-import org.example.Exception.GameOfLifeBoardException;
-import org.example.Exception.InvalidActionException;
+import org.example.exception.BoardSizeException;
+import org.example.exception.GameOfLifeBoardException;
+import org.example.exception.InvalidActionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +40,8 @@ public class MyController {
     private Button doStepButton;
     @FXML
     private ComboBox<String> languageComboBox;
+    @FXML
+    private TextField boardNameField;
 
     private ResourceBundle bundle;
 
@@ -186,7 +188,6 @@ public class MyController {
 
     private void showBoard(GameOfLifeBoard board) {
         logger.info("Displaying the board with size {}x{}", board.getHeight(), board.getWidth());
-        Stage stage = new Stage();
         layout = new GridPane();
         layout.setPadding(new Insets(15));
         layout.setHgap(3);
@@ -211,7 +212,7 @@ public class MyController {
 
         GridPane.setConstraints(doStepButton, 0, board.getHeight());
         layout.add(doStepButton, 0, board.getHeight(), board.getWidth(), 1);
-
+        Stage stage = new Stage();
         Scene scene = new Scene(layout, 700, 700);
         stage.setScene(scene);
         stage.setTitle(bundle.getString("BoardTitle"));
@@ -246,7 +247,9 @@ public class MyController {
         }
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
-                board.getCell(i, j).setState(false);
+                GameOfLifeCell cell = board.getCell(i, j);
+                cell.setState(false);
+                cell.setBoard(board);
             }
         }
         Density boardDensity = Density.fromString(density);
@@ -273,27 +276,21 @@ public class MyController {
             return;
         }
 
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
-        File file = fileChooser.showSaveDialog(null);
+        String boardName = boardNameField.getText();
+        if (boardName == null || boardName.isEmpty()) {
+            logger.warn("Attempted to save board, but no board name is provided.");
+            showError("noBoardNameERROR");
+            return;
+        }
 
-        if (file != null) {
-            try {
-                String originalFileName = file.getAbsolutePath() + ".original";
-                try (FileGameOfLifeBoardDaoOriginalState dao = new FileGameOfLifeBoardDaoOriginalState(
-                        file.getAbsolutePath(), originalFileName)) {
-                    dao.write(currentBoard);
-                    dao.saveOriginalBoard(clonedBoard);
-                    logger.info("Board saved successfully to file: {}", file.getAbsolutePath());
-                    showInfo("saveSuccessInfo");
-                } catch (IOException e) {
-                    logger.error("Error saving the board to file: {}", file.getAbsolutePath(), e);
-                    showError("saveBoardERROR");
-                }
-            } catch (Exception e) {
-                logger.error("Unexpected error during board save process", e);
-                throw new RuntimeException(e);
-            }
+        currentBoard.setName(boardName);
+        try (JpaGameOfLifeBoardDao dao = new JpaGameOfLifeBoardDao()) {
+            dao.write(currentBoard);
+            logger.info("Board saved successfully to the database.");
+            showInfo("saveSuccessInfo");
+        } catch (Exception e) {
+            logger.error("Error saving the board to the database.", e);
+            showError("saveBoardERROR");
         }
     }
 
@@ -303,7 +300,7 @@ public class MyController {
         File file = fileChooser.showOpenDialog(null);
 
         if (file != null) {
-            try (FileGameOfLifeBoardDao dao = new FileGameOfLifeBoardDao(file.getAbsolutePath())) {
+            try (JpaGameOfLifeBoardDao dao = new JpaGameOfLifeBoardDao()) {
                 currentBoard = dao.read();
                 logger.info("Board loaded successfully from file: {}", file.getAbsolutePath());
                 showBoard(currentBoard);

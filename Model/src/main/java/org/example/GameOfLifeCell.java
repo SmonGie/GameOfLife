@@ -21,14 +21,29 @@ package org.example;
  */
 
 
+import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 import java.util.*;
 
+@Entity
 public class GameOfLifeCell implements Serializable, Comparable<GameOfLifeCell>, Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
     private boolean value;
+
+    @Transient
     private List<GameOfLifeCell> neighbors;
+
+    @ManyToOne
+    @JoinColumn(name = "board_id", nullable = false)
+    private GameOfLifeBoard board;
+
+    @Transient
     private List<CellObserver> observers;
     private static final Random rand = new Random();
 
@@ -198,4 +213,19 @@ public class GameOfLifeCell implements Serializable, Comparable<GameOfLifeCell>,
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public GameOfLifeBoard getBoard() {
+        return board;
+    }
+
+    public void setBoard(GameOfLifeBoard board) {
+        this.board = board;
+    }
 }

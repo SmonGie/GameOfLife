@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<?import javafx.scene.text.Text?>
-<VBox alignment="CENTER" prefHeight="260.0" prefWidth="260.0" spacing="10" xmlns:fx="http://javafx.com/fxml/1"
-      xmlns="http://javafx.com/javafx/17.0.12" fx:controller="org.example.MyController">
+<VBox alignment="CENTER" prefHeight="351.0" prefWidth="265.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.MyController">
     <padding>
-        <Insets bottom="15" left="15" right="15" top="15"/>
+        <Insets bottom="15" left="15" right="15" top="15" />
     </padding>
 
-    <Label fx:id="gameOfLifeLabel" text="gameOfLifeLabel"/>
-    <Label fx:id="boardSizeLabel" text="Wymiary planszy:"/>
-    <TextField fx:id="sizeField" promptText="Wymiary planszy (min 4, max 20)"/>
+    <Label fx:id="gameOfLifeLabel" text="gameOfLifeLabel" />
+    <Label fx:id="boardSizeLabel" text="Wymiary planszy:" />
+    <TextField fx:id="sizeField" promptText="Wymiary planszy (min 4, max 20)" />
 
-    <Label fx:id="densityLabel" text="Zagęszczenie:"/>
-    <ComboBox fx:id="comboBox"/>
+    <Label fx:id="densityLabel" text="Zagęszczenie:" />
+    <ComboBox fx:id="comboBox" />
 
-    <Button fx:id="startButton" onAction="#startSimulation" text="Start"/>
-    <Button fx:id="saveBoardButton" onAction="#saveBoard" text="Zapisz planszę"/>
-    <Button fx:id="loadBoardButton" onAction="#loadBoard" text="Odczytaj planszę"/>
-    <ComboBox fx:id="languageComboBox" onAction="#changeLanguageFromComboBox"
-              promptText="Choose Language">
+    <Button fx:id="startButton" onAction="#startSimulation" text="Start" />
+    <Button fx:id="saveBoardButton" onAction="#saveBoard" text="Zapisz planszę" />
+    <TextField fx:id="boardNameField" promptText="Enter board name" />
+    <Button fx:id="loadBoardButton" onAction="#loadBoard" prefHeight="0.0" prefWidth="106.0" text="Odczytaj planszę" />
+    <ComboBox fx:id="languageComboBox" onAction="#changeLanguageFromComboBox" prefHeight="0.0" prefWidth="138.0" promptText="Choose Language">
         <items>
             <FXCollections fx:factory="observableArrayList">
-                <String fx:value="pl"/>
-                <String fx:value="en"/>
-                <String fx:value="es"/>
+                <String fx:value="pl" />
+                <String fx:value="en" />
+                <String fx:value="es" />
             </FXCollections>
         </items>
     </ComboBox>
-    <Text fx:id="author1Text"/>
-    <Text fx:id="author2Text"/>
+    <Text fx:id="author1Text" />
+    <Text fx:id="author2Text" />
 </VBox>

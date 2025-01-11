@@ -20,14 +20,24 @@ package org.example;
  * #L%
  */
 
+import jakarta.persistence.*;
 import org.apache.commons.lang3.builder.*;
 
 import java.io.Serializable;
 import java.util.*;
 
+@Entity
 public class GameOfLifeBoard implements Serializable, Cloneable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false)
+    private String name;
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameOfLifeCell> board;
+    @Column(nullable = false)
     int width;
+    @Column(nullable = false)
     int height;
 
     public GameOfLifeBoard(int width, int height) {
@@ -35,6 +45,18 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
         this.height = height;
         initializeCells();
         initializeNeighbors();
+    }
+
+    public GameOfLifeBoard(String name, int width, int height) {
+        this.name = name;
+        this.width = width;
+        this.height = height;
+        initializeCells();
+        initializeNeighbors();
+    }
+
+    public GameOfLifeBoard() {
+
     }
 
     public GameOfLifeBoard(GameOfLifeBoard other) {
@@ -70,6 +92,14 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
                 }
             }
         }
+    }
+
+    public String getName() {
+       return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getWidth() {
@@ -140,11 +170,6 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
         result.append("}");
 
         return result.toString();
-    }
-
-    public void toggleCellState(int row, int col) {
-        GameOfLifeCell cell = getCell(row, col);
-        cell.setState(!cell.getCellValue());
     }
 
     @Override
@@ -220,4 +245,11 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

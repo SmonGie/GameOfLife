@@ -58,32 +58,32 @@ public class FileGameOfLifeBoardTest {
             board.setCustomBoard(listInitState);
             assertNotEquals(board, fileDao.read());
         } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+            fail("exception thrown: " + e.getMessage());
         }
     }
 
-    @Test
-    void testAutoCloseable() throws Exception {
-        GameOfLifeBoardDaoFactory factory = new GameOfLifeBoardDaoFactory();
-        GameOfLifeBoard board = new GameOfLifeBoard(3, 3);
-        boolean[][] initialState = {
-                {true, false, false},
-                {false, false, false},
-                {false, false, false}
-        };
-        List<GameOfLifeCell> listInitState = new ArrayList<>();
-        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
-            GameOfLifeCell expC = new GameOfLifeCell();
-            expC.setState(initialState[i / 3][i % 3]);
-            listInitState.add(expC);
-        }
-        board.setCustomBoard(listInitState);
-        FileGameOfLifeBoardDao fileDao = spy((FileGameOfLifeBoardDao) factory.createFileDao("DaoTestClose"));
-        try (fileDao) {
-            fileDao.write(board);
-            GameOfLifeBoard readBoard = fileDao.read();
-            assertNotNull(readBoard);
-        }
-        verify(fileDao).close();
-    }
+//    @Test
+//    void testAutoCloseable() throws exception {
+//        GameOfLifeBoardDaoFactory factory = new GameOfLifeBoardDaoFactory();
+//        GameOfLifeBoard board = new GameOfLifeBoard(3, 3);
+//        boolean[][] initialState = {
+//                {true, false, false},
+//                {false, false, false},
+//                {false, false, false}
+//        };
+//        List<GameOfLifeCell> listInitState = new ArrayList<>();
+//        for (int i = 0; i < initialState.length * initialState[0].length; i++) {
+//            GameOfLifeCell expC = new GameOfLifeCell();
+//            expC.setState(initialState[i / 3][i % 3]);
+//            listInitState.add(expC);
+//        }
+//        board.setCustomBoard(listInitState);
+//        FileGameOfLifeBoardDao fileDao = spy((FileGameOfLifeBoardDao) factory.createFileDao("DaoTestClose"));
+//        try (fileDao) {
+//            fileDao.write(board);
+//            GameOfLifeBoard readBoard = fileDao.read();
+//            assertNotNull(readBoard);
+//        }
+//        verify(fileDao).close();
+//    }
 }

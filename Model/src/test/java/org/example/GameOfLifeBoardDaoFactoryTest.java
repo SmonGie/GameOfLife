@@ -32,7 +32,7 @@ public class GameOfLifeBoardDaoFactoryTest {
         try {
             assertTrue(factory.createFileDao("DaoTest").getClass().equals(FileGameOfLifeBoardDao.class));
         } catch (Exception e) {
-            fail("Exception thrown: " + e.getMessage());
+            fail("exception thrown: " + e.getMessage());
         }
     }
 

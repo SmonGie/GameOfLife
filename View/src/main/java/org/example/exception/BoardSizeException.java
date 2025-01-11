@@ -1,6 +1,6 @@
-package org.example.Exception;
+package org.example.exception;
 
-public class BoardSizeException extends GameOfLifeBoardException{
+public class BoardSizeException extends GameOfLifeBoardException {
     public BoardSizeException(String message) {
         super(message);
     }
