@@ -60,6 +60,7 @@ public class MyController {
     private GridPane layout;
 
     private PlainGameOfLifeSimulator simulator;
+    JpaGameOfLifeBoardDao dao = new JpaGameOfLifeBoardDao();
 
     private static final Logger logger = LoggerFactory.getLogger(MyController.class);
 
@@ -285,7 +286,7 @@ public class MyController {
         }
 
         currentBoard.setName(boardName);
-        try (JpaGameOfLifeBoardDao dao = new JpaGameOfLifeBoardDao()) {
+        try  {
             dao.write(currentBoard);
             logger.info("Board saved successfully to the database.");
             showInfo("saveSuccessInfo");

@@ -33,7 +33,7 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<GameOfLifeCell> board;
     @Column(nullable = false)
     int width;
