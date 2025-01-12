@@ -74,6 +74,10 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
             cellList.add(new GameOfLifeCell());
         }
         Collections.shuffle(cellList);
+        for (int i = 0; i < width * height; i++) {
+            cellList.get(i).setPos(i / width, i % height);
+            cellList.get(i).setBoard(this);
+        }
         board = Collections.unmodifiableList(cellList);
     }
 
@@ -95,7 +99,7 @@ public class GameOfLifeBoard implements Serializable, Cloneable {
     }
 
     public String getName() {
-       return name;
+        return name;
     }
 
     public void setName(String name) {

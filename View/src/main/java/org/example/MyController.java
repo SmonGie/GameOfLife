@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
+//import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import org.example.exception.BoardSizeException;
@@ -15,8 +15,9 @@ import org.example.exception.InvalidActionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
+//import java.io.File;
+//import java.io.IOException;
+import java.sql.*;
 import java.util.*;
 
 public class MyController {
@@ -153,16 +154,16 @@ public class MyController {
             initializeBoardDensity(currentBoard, comboBox.getValue().toString());
             clonedBoard = new GameOfLifeBoard(currentBoard);
             showBoard(currentBoard);
-        }   catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             logger.error("Invalid number format encountered: {}", e.getMessage());
             showError("dataFormatERROR");
-        }   catch (InvalidActionException e) {
+        } catch (InvalidActionException e) {
             logger.error("Invalid action error: {}", e.getMessage());
             showError("invalidActionError");
-        }   catch (BoardSizeException e) {
+        } catch (BoardSizeException e) {
             logger.error("Board size error: {}", e.getMessage());
             showError("sizeERROR");
-        }   catch (GameOfLifeBoardException e) {
+        } catch (GameOfLifeBoardException e) {
             logger.error("Game board initialization failed: {}", e.getMessage(), e);
             showError("boardInitializationError");
         }
@@ -296,26 +297,66 @@ public class MyController {
 
     @FXML
     public void loadBoard() {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(null);
+        String url = "jdbc:postgresql://localhost:5434/kompo";
+        String user = "postgres";
+        String password = "haslo";
+        String boardName = boardNameField.getText();
+        String query1 = "SELECT * FROM GameOfLifeBoard WHERE name = ?";
+        String query2 = "SELECT * FROM GameOfLifeCell";
+        int w = 4;
+        int h = 4;
+        String bid = "1";
+        GameOfLifeBoard tempB = new GameOfLifeBoard(w, h);
 
-        if (file != null) {
-            try (JpaGameOfLifeBoardDao dao = new JpaGameOfLifeBoardDao()) {
-                currentBoard = dao.read();
-                logger.info("Board loaded successfully from file: {}", file.getAbsolutePath());
-                showBoard(currentBoard);
-                showInfo("loadSuccessInfo");
-            } catch (IOException e) {
-                logger.error("Error loading the board from file: {}", file.getAbsolutePath(), e);
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(query1)) {
+
+            pstmt.setString(1, boardName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (!rs.next()) {
+                logger.error("Error loading the board from db");
                 showError("loadBoardERROR");
-            } catch (IllegalArgumentException e) {
-                logger.error("Invalid data in the board file: {}", file.getAbsolutePath(), e);
-                showError("loadBoardERROR");
-            } catch (Exception e) {
-                logger.error("Unexpected error during board load process", e);
-                throw new RuntimeException(e);
+                return;
             }
+
+            if (rs.next()) {
+                String boardId = rs.getString("id");
+                int width = rs.getInt("width");
+                int height = rs.getInt("height");
+                w = width;
+                h = height;
+                bid = boardId;
+                tempB = new GameOfLifeBoard(width, height);
+            }
+
+        } catch (Exception e) {
+            logger.error("Unexpected error during board load process", e);
+            throw new RuntimeException(e);
         }
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query2)) {
+
+            while (rs.next()) {
+                int x = rs.getInt("xpos");
+                int y = rs.getInt("ypos");
+                boolean value = rs.getBoolean("value");
+                String boardId = rs.getString("board_id");
+                if (boardId.equals(bid)) {
+                    tempB.getCell(x, y).setState(value);
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Unexpected error during cell load process", e);
+            throw new RuntimeException(e);
+        }
+        logger.info("Board loaded successfully from db");
+        currentBoard = tempB;
+        showBoard(currentBoard);
+        showInfo("loadSuccessInfo");
+
     }
 
 }

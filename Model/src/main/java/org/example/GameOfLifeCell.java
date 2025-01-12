@@ -34,6 +34,11 @@ public class GameOfLifeCell implements Serializable, Comparable<GameOfLifeCell>,
     private Long id;
 
     @Column(nullable = false)
+    int xpos;
+    @Column(nullable = false)
+    int ypos;
+
+    @Column(nullable = false)
     private boolean value;
 
     @Transient
@@ -227,5 +232,10 @@ public class GameOfLifeCell implements Serializable, Comparable<GameOfLifeCell>,
 
     public void setBoard(GameOfLifeBoard board) {
         this.board = board;
+    }
+
+    public void setPos(int x, int y) {
+        xpos = x;
+        ypos = y;
     }
 }
